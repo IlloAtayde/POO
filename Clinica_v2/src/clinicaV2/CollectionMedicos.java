@@ -1,6 +1,7 @@
 package clinicaV2;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Iterator;
 
 /**
@@ -9,8 +10,8 @@ import java.util.Iterator;
  */
 public class CollectionMedicos {
 	
-	private ArrayList<Medico> ColMedicos;
-	private Iterator<Medico> itMedicos = ColMedicos.iterator();
+	private List<Medico> ColMedicos;
+	//private Iterator<Medico> itMedicos = ColMedicos.iterator();
 
 	public CollectionMedicos() {
 		// TODO Auto-generated constructor stub
@@ -38,9 +39,11 @@ public class CollectionMedicos {
 	 * @return Objeto Medico
 	 */
 	public Medico BuscarMedicoCRM(String CRM){
+		Iterator<Medico> itMedicos = ColMedicos.iterator();
 		while(itMedicos.hasNext()){
-			if(itMedicos.next().getCRM().equals(CRM)){
-				return itMedicos.next();
+			Medico medTemp = itMedicos.next();
+			if(medTemp.getCRM().equals(CRM)){
+				return medTemp;
 			}
 		}
 		return null;
@@ -52,10 +55,12 @@ public class CollectionMedicos {
 	 */
 	public void BuscarMedicoNome(String nomeMedico){
 		String nomeTemp;
+		Iterator<Medico> itMedicos = ColMedicos.iterator();
 		while(itMedicos.hasNext()){
-			nomeTemp = itMedicos.next().getNome();
+			Medico medTemp = itMedicos.next();
+			nomeTemp = medTemp.getNome();
 			if(nomeTemp.toLowerCase().contains(nomeMedico.toLowerCase())){
-				System.out.println(itMedicos.next().getNome() + itMedicos.next().getCRM() + itMedicos.next().getEspecialidade());
+				System.out.printf("\t%s \tCRM:%s\n \t%s\n",medTemp.getNome(), medTemp.getCRM(), medTemp.getEspecialidade());
 			}
 		}
 	}

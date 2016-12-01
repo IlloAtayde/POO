@@ -13,6 +13,27 @@ public class Medico {
 	private String CRM;
 	private String nome;
 	private String especialidade;
+	
+	
+	/**
+	 * @param CRM
+	 * @param nome
+	 * @param especialidade
+	 */
+	public Medico(String CRM, String nome, String especialidade) {
+		this.CRM = CRM;
+		this.nome = nome;
+		this.especialidade = especialidade;
+	}
+	/**
+	 * @param CRM
+	 * @param especialidade
+	 */
+	public Medico(String CRM, String nome){
+		this.CRM = CRM;
+		this.nome = nome;
+		this.especialidade = "Clínico Geral";
+	}
 	/**
 	 * @return the CRM
 	 */

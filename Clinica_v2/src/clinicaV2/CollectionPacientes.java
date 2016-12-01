@@ -103,7 +103,7 @@ public class CollectionPacientes {
 			idadeTemp = paciTemp.getNascimento();
 			periodo = Period.between(idadeTemp, hoje);
 			if(periodo.getYears() > 60){
-				System.out.println(paciTemp.getNome());
+				System.out.printf("\t%s \t%d Anos.\n",paciTemp.FormatarNomePaciente(), periodo.getYears());
 			}
 		}
 	}

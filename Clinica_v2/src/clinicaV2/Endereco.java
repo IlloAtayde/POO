@@ -12,10 +12,11 @@ public class Endereco {
 	private String CEP;
 	private String logradouro;
 	private String bairro;
-	private int numero;
+	private String numero;
 	private String complemento;
+	static final String textoPadrao = "NÃO INFORMADO";
 	
-	public Endereco(String CEP, String logradouro, int numero, String bairro, String complemento){		
+	public Endereco(String CEP, String logradouro, String numero, String bairro, String complemento){		
 		this.CEP = CEP;
 		this.logradouro = logradouro;
 		this.numero = numero;
@@ -24,6 +25,12 @@ public class Endereco {
 	}
 	
 	public Endereco(){
+		this.CEP = textoPadrao;
+		this.logradouro = textoPadrao;
+		this.numero = textoPadrao;
+		this.bairro = textoPadrao;
+		this.complemento = textoPadrao;
+		
 	}
 
 	/**
@@ -71,14 +78,14 @@ public class Endereco {
 	/**
 	 * @return the numero
 	 */
-	public int getNumero() {
+	public String getNumero() {
 		return numero;
 	}
 
 	/**
 	 * @param numero the numero to set
 	 */
-	public void setNumero(int numero) {
+	public void setNumero(String numero) {
 		this.numero = numero;
 	}
 
@@ -105,53 +112,6 @@ public class Endereco {
 				+ ", bairro=" + bairro + ", numero=" + numero
 				+ ", complemento=" + complemento + "]";
 	}
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null) {
-			return false;
-		}
-		if (!(obj instanceof Endereco)) {
-			return false;
-		}
-		Endereco other = (Endereco) obj;
-		if (CEP == null) {
-			if (other.CEP != null) {
-				return false;
-			}
-		} else if (!CEP.equals(other.CEP)) {
-			return false;
-		}
-		if (bairro == null) {
-			if (other.bairro != null) {
-				return false;
-			}
-		} else if (!bairro.equals(other.bairro)) {
-			return false;
-		}
-		if (complemento == null) {
-			if (other.complemento != null) {
-				return false;
-			}
-		} else if (!complemento.equals(other.complemento)) {
-			return false;
-		}
-		if (logradouro == null) {
-			if (other.logradouro != null) {
-				return false;
-			}
-		} else if (!logradouro.equals(other.logradouro)) {
-			return false;
-		}
-		if (numero != other.numero) {
-			return false;
-		}
-		return true;
-	}
+	
 }
 	
