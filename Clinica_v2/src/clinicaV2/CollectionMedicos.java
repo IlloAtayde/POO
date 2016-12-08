@@ -17,6 +17,12 @@ public class CollectionMedicos {
 		// TODO Auto-generated constructor stub
 		ColMedicos = new ArrayList<Medico>();
 	}
+	public boolean ColVazia(){
+		if(ColMedicos.size() == 0){
+			return true;
+		}
+		return false;
+	}
 	/**
 	 * 
 	 * @param medico
@@ -46,6 +52,7 @@ public class CollectionMedicos {
 				return medTemp;
 			}
 		}
+		System.err.println("Médico não cadastrado!");
 		return null;
 	}
 	/**
@@ -62,6 +69,13 @@ public class CollectionMedicos {
 			if(nomeTemp.toLowerCase().contains(nomeMedico.toLowerCase())){
 				System.out.printf("\t%s \tCRM:%s\n \t%s\n",medTemp.getNome(), medTemp.getCRM(), medTemp.getEspecialidade());
 			}
+		}
+	}
+	public void ListarMedicos(){
+		Iterator<Medico> itMedicos = ColMedicos.iterator();
+		while (itMedicos.hasNext()){
+			Medico medTemp = itMedicos.next();
+			System.out.printf("\t%s \tCRM:%s\n \t%s\n",medTemp.getNome(), medTemp.getCRM(), medTemp.getEspecialidade());
 		}
 	}
 

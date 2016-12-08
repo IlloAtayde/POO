@@ -29,9 +29,7 @@ public class Medico {
 	 * @param CRM
 	 * @param especialidade
 	 */
-	public Medico(String CRM, String nome){
-		this.CRM = CRM;
-		this.nome = nome;
+	public Medico(){
 		this.especialidade = "Clínico Geral";
 	}
 	/**
@@ -75,8 +73,7 @@ public class Medico {
 	 */
 	@Override
 	public String toString() {
-		return "Medico [CRM=" + CRM + ", nome=" + nome + ", especialidade="
-				+ especialidade + "]";
+		return "Médico: "+ nome + ", " + especialidade + ", CRM: " + CRM;
 	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)

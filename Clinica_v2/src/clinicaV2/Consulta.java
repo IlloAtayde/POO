@@ -17,7 +17,7 @@ public class Consulta {
 	public Consulta(Paciente paciente){
 		this.dataConsulta = LocalDate.now();
 		this.paciente = paciente;
-		this.medico = new Medico("000","À DEFINIR") ;
+		this.medico = new Medico() ;
 	}
 	/**
 	 * @return the dataConsulta

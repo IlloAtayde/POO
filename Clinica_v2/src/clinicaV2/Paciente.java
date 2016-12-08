@@ -28,9 +28,7 @@ public class Paciente {
 		this.end = new Endereco();
 		this.nascimento = LocalDate.now();
 	}
-	public Paciente (String nome){
-		this.CPF = "Sem CPF";
-		this.nome = nome;
+	public Paciente (){
 		this.end = new Endereco();
 		this.nascimento = LocalDate.now();
 	}
@@ -48,7 +46,7 @@ public class Paciente {
 			}
 			nomeFormatado += " " + nomeTemp[i].charAt(0) + ".";
 		}
-		if(this.getSexo().equals("feminino")){
+		if(this.getSexo().equals("f")){
 			return "Sra. " + nomeFormatado;
 		}
 		return "Sr. " + nomeFormatado;

@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.swing.text.StyledEditorKit.BoldAction;
+
 /**
  * @author illoatayde
  *
@@ -21,6 +23,12 @@ public class CollectionPacientes {
 	public CollectionPacientes() {
 		// TODO Auto-generated constructor stub
 		ColPacientes = new ArrayList<Paciente>();
+	}
+	public boolean ColVazia(){
+		if(ColPacientes.size() == 0){
+			return true;
+		}
+		return false;
 	}
 	/**
 	 * 
@@ -49,8 +57,10 @@ public class CollectionPacientes {
 			Paciente paciTemp = itPaciente.next();
 			if(paciTemp.getCPF().equals(CPF)){
 				System.out.println(paciTemp.toString());
+				return;
 			}
 		}
+		System.err.println("Paciente não cadastrado!");
 	}
 	/**
 	 * 
@@ -65,6 +75,7 @@ public class CollectionPacientes {
 				itPaciente.remove();
 			}
 		}
+		System.err.println("Paciente não cadastrado!");
 	}
 	/**
 	 * 
