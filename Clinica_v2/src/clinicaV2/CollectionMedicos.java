@@ -55,6 +55,41 @@ public class CollectionMedicos {
 		System.err.println("Médico não cadastrado!");
 		return null;
 	}
+	public boolean MedicoExiste(String CRM){
+		Iterator<Medico> itMedico = ColMedicos.iterator();
+		while(itMedico.hasNext()){
+			Medico mediTemp = itMedico.next();
+			if(mediTemp.getCRM().equals(CRM)){
+				return true;
+			}
+		}
+		return false;
+	}
+	public void ExibirMedicoCRM(String CRM){
+		Iterator<Medico> itMedicos = ColMedicos.iterator();
+		while(itMedicos.hasNext()){
+			Medico medTemp = itMedicos.next();
+			if(medTemp.getCRM().equals(CRM)){
+				System.out.print(medTemp.toString());
+				return;
+			}
+		}
+		System.err.println("Médico não cadastrado!");
+		return;
+	}
+	/**
+	 * Lista apenas nomes e CRMs dos médicos
+	 */
+	public void ListarMedicos(){
+		Iterator<Medico> itMedico = ColMedicos.iterator();
+		int contMedico = 0;
+		System.out.println("MÉDICOS CADASTRADOS:");
+		while(itMedico.hasNext()){
+			contMedico++;
+			Medico medTemp = itMedico.next();
+			System.out.println(contMedico + " - " + medTemp.getNome() + "CRM: " + medTemp.getCRM());
+		}
+	}
 	/**
 	 * 
 	 * @param nomeMedico
@@ -71,7 +106,7 @@ public class CollectionMedicos {
 			}
 		}
 	}
-	public void ListarMedicos(){
+	public void ListarMedicosCompleto(){
 		Iterator<Medico> itMedicos = ColMedicos.iterator();
 		while (itMedicos.hasNext()){
 			Medico medTemp = itMedicos.next();

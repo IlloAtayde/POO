@@ -21,6 +21,12 @@ public class CollectionConsultas {
 		// TODO Auto-generated constructor stub
 		ColConsultas = new ArrayList<Consulta>();
 	}
+	public boolean ColVazia(){
+		if(ColConsultas.size() == 0){
+			return true;
+		}
+		return false;
+	}
 	/**
 	 * 
 	 * @param consulta
@@ -57,10 +63,12 @@ public class CollectionConsultas {
 	 * Lista todas as consultas da coleção
 	 */
 	public void ListarConsultas(){
+		int contConsultas = 0;
 		Iterator<Consulta> itConsultas = ColConsultas.iterator();
 		while(itConsultas.hasNext()){
+			contConsultas++;
 			Consulta consTemp = itConsultas.next();
-			System.out.println(consTemp.toString());
+			System.out.println(contConsultas + " - " + consTemp.toString());
 		}
 	}
 	/**

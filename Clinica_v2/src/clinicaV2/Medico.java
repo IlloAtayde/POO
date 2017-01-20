@@ -73,7 +73,7 @@ public class Medico {
 	 */
 	@Override
 	public String toString() {
-		return "Médico: "+ nome + ", " + especialidade + ", CRM: " + CRM;
+		return nome + ", CRM: " + CRM +"\n" + especialidade ;
 	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)

@@ -19,6 +19,11 @@ public class Consulta {
 		this.paciente = paciente;
 		this.medico = new Medico() ;
 	}
+	public Consulta(){
+		this.dataConsulta = LocalDate.now();
+		this.paciente = new Paciente();
+		this.medico = new Medico() ;
+	}
 	/**
 	 * @return the dataConsulta
 	 */
@@ -60,8 +65,9 @@ public class Consulta {
 	 */
 	@Override
 	public String toString() {
-		return "Consulta [dataConsulta=" + dataConsulta + ", paciente="
-				+ paciente.getNome() + ", medico=" + medico.getNome() + "]";
+		return "Consulta - Data: " + dataConsulta + "\nPaciente:"
+				+ this.getPaciente().FormatarNomePaciente() + "\nMédico:" + this.getMedico().getNome()
+				+ "\nEspecialidade:" + this.getMedico().getEspecialidade();
 	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)

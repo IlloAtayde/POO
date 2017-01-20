@@ -118,8 +118,8 @@ public class Paciente {
 	 */
 	@Override
 	public String toString() {
-		return "Paciente [CPF=" + CPF  + ", nome=" + nome + ", sexo=" + sexo
-				+ ", nascimento=" + nascimento +  ", end=" + end.toString() + "]";
+		return this.FormatarNomePaciente() + ", sexo: " + sexo + ", CPF: " + CPF  
+				+ "\nData nascimento: " + nascimento +  "\nEndereço:\n" + end.toString();
 	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)

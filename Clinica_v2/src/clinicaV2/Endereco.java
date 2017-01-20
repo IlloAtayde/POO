@@ -108,9 +108,8 @@ public class Endereco {
 	 */
 	@Override
 	public String toString() {
-		return "Endereco [CEP=" + CEP + ", logradouro=" + logradouro
-				+ ", bairro=" + bairro + ", numero=" + numero
-				+ ", complemento=" + complemento + "]";
+		return logradouro + ", Nº: " + numero + ", Complemento: " + complemento
+				+ "\nBairro: " + bairro + ", CEP: " + CEP;
 	}
 	
 }

@@ -59,7 +59,7 @@ public class Auxiliar{
 			do{
 				imprimirMenu("CONSULTA","ADICIONAR,POR DATA,LISTAR,POR MÉDICO,POR PACIENTE,MENU PRINCIPAL");
 				opSubMenu = capturaMenu(6);
-				trataMenuConsulta(opSubMenu,colCons);
+				trataMenuConsulta(opSubMenu,colCons,colMed,colPac);
 			}while(opSubMenu < 6);
 			break;
 		case 4:
@@ -73,36 +73,40 @@ public class Auxiliar{
 		
 		switch (opMenu) {
 		case 1:
-			System.out.println("ADICIONAR PACIENTE: ");
+			//System.out.println("ADICIONAR PACIENTE: ");
 			colPac.AdicionarPaciente(cadastrarPaciente());
 			break;
 		case 2:
-			if(!colPac.ColVazia()){
-				System.out.println("BUSCAR POR CPF: ");
-				System.out.println("Digite o CPF do paciente: ");
-				colPac.BuscarPacienteCPF(lerCpf());
+			if(colPac.ColVazia()){
+				System.err.println("Não existe pacientes cadastrados!");
 				break;
 			}
-			System.err.println("Não existe nenhum paciente cadastrado!");
+			System.out.println("BUSCAR POR CPF: ");
+			System.out.println("Digite o CPF do paciente: ");
+			colPac.ExibirPacienteCPF(lerString());
 			break;
 		case 3:
-			if(!colPac.ColVazia()){
-				System.out.println("REMOVER POR CPF: ");
-				System.out.println("Digite o CPF do paciente: ");
-				colPac.RemoverPacienteCPF(lerCpf());
+			if(colPac.ColVazia()){
+				System.err.println("Não existe pacientes cadastrados!");
 				break;
 			}
-			System.err.println("Não existe nenhum paciente cadastrado!");
+			System.out.println("REMOVER POR CPF: ");
+			System.out.println("Digite o CPF do paciente: ");
+			if(colPac.RemoverPacienteCPF(lerString())){
+				System.out.println("Remoção efetuada com sucesso!");
+				break;
+			}
+			System.err.println("Falha na remoção!");
 			break;
 		case 4:
 			if(!colPac.ColVazia()){
 				System.out.println("QUANTIDADE POR SEXO: ");
-				System.out.println("Digite o SEXO do paciente: ");
+				System.out.println("SEXO: ");
 				int qntSexo = colPac.QuantidadePorSexo(lerSexo());
-				System.out.println("Número de pacientes do sexo solicitado: " + qntSexo);
+				System.out.println(qntSexo + " paciente(s) encontrado(s)");
 				break;
 			}
-			System.err.println("Não existe nenhum paciente cadastrado!");
+			System.err.println("Não existe pacientes cadastrados!");
 			break;
 		case 5:
 			if(!colPac.ColVazia()){
@@ -110,7 +114,7 @@ public class Auxiliar{
 				colPac.ListarPacientesCompleto();
 				break;
 			}
-			System.err.println("Não existe nenhum paciente cadastrado!");
+			System.err.println("Não existe pacientes cadastrados!");
 			break;
 		case 6:
 			if(!colPac.ColVazia()){
@@ -118,7 +122,7 @@ public class Auxiliar{
 				colPac.ListarPacientesMaioresdeSessenta();
 				break;
 			}
-			System.err.println("Não existe nenhum paciente cadastrado!");
+			System.err.println("Não existe pacientes cadastrados!");
 			break;
 		case 7:
 			System.out.println("RETORNANDO AO MENU PRINCIPAL!");
@@ -130,34 +134,34 @@ public class Auxiliar{
 		
 		switch (opMenu) {
 		case 1:
-			System.out.println("ADICIONAR MÉDICO: ");
+			//System.out.println("ADICIONAR MÉDICO: ");
 			colMed.AdicionarMedicos(cadastrarMedico());
 			break;
 		case 2:
 			if(!colMed.ColVazia()){
-				System.out.println("BUSCAR POR CRM: ");
+				System.out.println("EXIBIR POR CRM: ");
 				System.out.println("Digite o CRM do Médico: ");
-				System.out.println(colMed.BuscarMedicoCRM(lerCpf()).toString());
+				colMed.ExibirMedicoCRM(lerString());
 				break;
 			}
-			System.err.println("Não existe nenhum médico cadastrado!");
+			System.err.println("Não existe médicos cadastrados!");
 			break;
 		case 3:
 			if(!colMed.ColVazia()){
 				System.out.println("PESQUISAR POR NOME: ");
 				System.out.println("DIGITE O NOME DO MÉDICO: ");
-				colMed.BuscarMedicoNome(lerNome());
+				colMed.BuscarMedicoNome(lerString());
 				break;
 			}
-			System.err.println("Não existe nenhum médico cadastrado!");
+			System.err.println("Não existe médicos cadastrados!");
 			break;
 		case 4:
 			if(!colMed.ColVazia()){
 				System.out.println("LISTAR MÉDICOS: ");
-				colMed.ListarMedicos();
+				colMed.ListarMedicosCompleto();
 				break;
 			}
-			System.err.println("Não existe nenhum médico cadastrado!");
+			System.err.println("Não existe médicos cadastrados!");
 			break;
 		case 5:
 			System.out.println("RETORNANDO AO MENU PRINCIPAL!");
@@ -165,16 +169,32 @@ public class Auxiliar{
 			break;
 		}
 	}
-	public static void trataMenuConsulta(int opMenu, CollectionConsultas colCons){
+	public static void trataMenuConsulta(int opMenu, CollectionConsultas colCons, CollectionMedicos colMed, CollectionPacientes colPac){
 		
 		switch (opMenu) {
 		case 1:
+			//System.out.println("ADICIONAR CONSULTA: ");
+			colCons.AdicionarConsulta(cadastrarConsulta(colMed, colPac));
 			break;
 		case 2:
 			break;
 		case 3:
+			if(!colCons.ColVazia()){
+				System.out.println("LISTAR CONSULTAS AGENDADAS: ");
+				colCons.ListarConsultas();
+				break;
+			}
+			System.err.println("Não existe consultas agendadas!");
 			break;
 		case 4:
+			if(!colCons.ColVazia()){
+				System.out.println("LISTAR CONSULTAS POR MÉDICO: ");
+				System.out.print("Insira o nome do médico:");
+				int qntConsultas = colCons.QntConsultasMedico(lerString());
+				System.out.println(qntConsultas + " consulta(s) encontrada(s)");
+				break;
+			}
+			System.err.println("Não existe consultas agendadas!");
 			break;
 		default:
 			break;
@@ -182,51 +202,89 @@ public class Auxiliar{
 	}
 	public static Paciente cadastrarPaciente(){
 		Paciente p = new Paciente();
-		System.out.print("Digite o nome do paciente: ");
-		p.setNome(lerNome());
-		System.out.print("Digite o sexo do paciente: ");
+		System.out.println("ADICIONAR PACIENTE");
+		System.out.print("Nome: ");
+		p.setNome(lerString());
+		System.out.print("Sexo: ");
 		p.setSexo(lerSexo());
-		System.out.print("Digite o CPF do paciente: ");
-		p.setCPF(lerCpf());
+		System.out.print("CPF: ");
+		p.setCPF(lerString());
 		//System.out.print("Digite sua idade: ");
 		p.setEnd(cadastrarEndereco());
+		System.out.println("PACIENTE CADASTRADO COM SUCESSO!");
 		return p;
 	}
 	public static Endereco cadastrarEndereco(){
 		Endereco e = new Endereco();
-		System.out.println("Digite o nome do logradouro: ");
-		e.setLogradouro(lerNome());
-		System.out.println("Digite o número: ");
-		e.setNumero(lerNome());
-		System.out.println("Digite o bairro: ");
-		e.setBairro(lerNome());
-		System.out.println("Digite o complemento: ");
-		e.setComplemento(lerNome());
-		System.out.println("Digite o CEP: ");
-		e.setCEP(lerNome());
+		System.out.println("ADICIONAR ENDEREÇO:");
+		System.out.print("Logradouro: ");
+		e.setLogradouro(lerString());
+		System.out.print("Número: ");
+		e.setNumero(lerString());
+		System.out.print("Bairro: ");
+		e.setBairro(lerString());
+		System.out.print("Complemento: ");
+		e.setComplemento(lerString());
+		System.out.print("CEP: ");
+		e.setCEP(lerString());
 		return e;
 	}
 	public static Medico cadastrarMedico(){
 		Medico m = new Medico();
-		System.out.print("Digite o nome do Médico: ");
-		m.setNome(lerNome());
-		System.out.print("Digite o CRM: ");
-		m.setCRM(lerCpf());
-		System.out.print("Digite a especialidade: ");
-		m.setEspecialidade(lerNome());
+		System.out.println("ADICIONAR MÉDICO:");
+		System.out.print("Nome: ");
+		m.setNome(lerString());
+		System.out.print("CRM: ");
+		m.setCRM(lerString());
+		System.out.print("Especialidade: ");
+		m.setEspecialidade(lerString());
+		System.out.println("MÉDICO CADASTRADO COM SUCESSO!");
 		return m;
 	}
-	public static String lerNome(){
+	public static Consulta cadastrarConsulta(CollectionMedicos colMed, CollectionPacientes colPac){
+		Consulta c = new Consulta();
+		System.out.println("ADICIONAR CONSULTA:");
+		if(colPac.ColVazia()){
+			c.setPaciente(cadastrarPaciente());
+		}else {
+			colPac.ListarPacientes();
+			System.out.print("Insira o CPF do paciente: ");
+			String CPFTemp = lerString();
+			while(!(colPac.PacienteExiste(CPFTemp))){
+				System.err.println("Paciente não cadastrado!");
+				System.out.println("Insira o CPF do paciente: ");
+				CPFTemp = lerString();
+			}
+			c.setPaciente(colPac.BuscarPacienteCPF(CPFTemp));			
+		}
+		if(colMed.ColVazia()){
+			c.setMedico(cadastrarMedico());
+		}else {
+			colMed.ListarMedicos();
+			System.out.print("Insira o CRM do Médico: ");
+			String CRMTemp = lerString();
+			while(!(colMed.MedicoExiste(CRMTemp))){
+				System.err.println("Médico não cadastrado!");
+				System.out.println("Insira o CRM do médico: ");
+				CRMTemp = lerString();
+			}
+			c.setMedico(colMed.BuscarMedicoCRM(lerString()));
+		}
+		System.out.println(c.toString());
+		System.out.println("CONSULTA CADASTRADA COM SUCESSO!");
+		return c;
+	}
+	public static String lerString(){
 		
 		Scanner sc = new Scanner(System.in);
 		
 		while(sc.hasNextDouble() || sc.hasNextInt()){
-			System.err.println("Digite o nome corretamente!: ");
+			System.err.println("Entrada inválida!: ");
 			sc.next();			
 		}
-		String nome = sc.nextLine();
+		String strLida = sc.nextLine();
 		
-		return nome;
+		return strLida;
 	}
 	public static String lerSexo(){
 		
@@ -242,6 +300,7 @@ public class Auxiliar{
 		}		
 		return sexo;
 	}
+	/*
 	public static String lerCpf(){
 		
 		Scanner sc = new Scanner(System.in);
@@ -254,4 +313,5 @@ public class Auxiliar{
 		
 		return cpf;
 	}
+	*/
 }
