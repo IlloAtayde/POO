@@ -23,8 +23,8 @@ public class Cachorro extends Animal {
 	private String porte;
 	private String habilidades;
 	
-	public Cachorro(String registro, String nome, String sexo, String raca, String porte, String habilidades, String comportamento, LocalDate dataChegada, LocalDate dataNascimento, ProntuarioMedico condicoesGerais) {
-		super(registro, nome, sexo, raca, comportamento, dataChegada, dataNascimento,	condicoesGerais);
+	public Cachorro(String registro, String nome, String sexo, String raca, String porte, String habilidades, String comportamento, String dataChegStr, String dataNascStr, ProntuarioMedico condicoesGerais) {
+		super(registro, nome, sexo, raca, comportamento, dataChegStr, dataNascStr,	condicoesGerais);
 		this.porte = porte;
 		this.habilidades = habilidades;
 	}

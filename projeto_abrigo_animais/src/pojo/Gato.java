@@ -22,8 +22,8 @@ public class Gato extends Animal {
 	 * @param condicoesGerais
 	 */
 	private boolean vomitaBoladePelos;
-	public Gato(String registro, String nome, String sexo, String raca, String comportamento, boolean vomitaBoladePelos, LocalDate dataChegada, LocalDate dataNascimento, ProntuarioMedico condicoesGerais) {
-		super(registro, nome, sexo, raca, comportamento, dataChegada, dataNascimento,	condicoesGerais);
+	public Gato(String registro, String nome, String sexo, String raca, String comportamento, boolean vomitaBoladePelos, String dataChegStr, String dataNascStr, ProntuarioMedico condicoesGerais) {
+		super(registro, nome, sexo, raca, comportamento, dataChegStr, dataNascStr,	condicoesGerais);
 		this.vomitaBoladePelos = vomitaBoladePelos;
 	}
 	public Gato(){

@@ -45,7 +45,7 @@ public class Auxiliar {
 		switch (opcaoMenu) {
 		case 1:
 			do{
-				imprimirMenu("ANIMAIS", "ADICIONAR,REMOVER,PESQUISAR REGISTRO,QUANTIDADE SEXO,LISTAR TODOS,MENU PRINCIPAL");
+				imprimirMenu("ANIMAIS", "ADICIONAR,REMOVER,PESQUISAR REGISTRO,QUANTIDADE SEXO,LISTAR ANIMAIS,MENU PRINCIPAL");
 				opSubMenu = capturaMenu(6);
 				trataMenuAnimais(opSubMenu,colAnim);
 			}while(opSubMenu < 6);
@@ -93,13 +93,14 @@ public class Auxiliar {
 			
 			break;
 		case 5:
-			
+			System.out.println("Informe C para Cães, G para Gatos ou T para Todos! ");
+			colAnim.ExibirAnimais(lerAnimal());
 			break;
 		case 6:
-			
+			System.out.println("RETORNANDO AO MENU PRINCIPAL!");
 			break;
 		case 7:
-			System.out.println("RETORNANDO AO MENU PRINCIPAL!");
+			
 		default:
 			break;
 		}
@@ -179,7 +180,8 @@ public class Auxiliar {
 			c.setHabilidades(lerString());
 			System.out.println("CADASTRADO EFETUADO COM SUCESSO!");
 			return c;
-		}else{
+		}
+		if(c_ou_g.equals("g")){
 			Gato g = new Gato();
 			System.out.print("REGISTRO: ");
 			g.setRegistro(lerInteiroToString());
@@ -199,6 +201,9 @@ public class Auxiliar {
 			g.setVomitaBoladePelos(lerS_N());
 			System.out.println("CADASTRADO EFETUADO COM SUCESSO!");
 			return g;
+		}else{
+			System.err.println("Tal opção não se aplica a esse menu!");
+			return null;
 		}
 	}
 	
@@ -252,13 +257,16 @@ public class Auxiliar {
 		}
 		return false;
 	}
-	
+	/**
+	 * 
+	 * @return String contendo 'c', 'g' ou 'todos'
+	 */
 	public static String lerAnimal(){
 		String animal = entradaTeclado.nextLine();
 		animal = animal.toLowerCase();
 		
-		while(!(animal.equals("c") || animal.equals("g"))){
-			System.err.println("Informe C para CACHORRO ou G para GATO!");
+		while(!(animal.equals("c") || animal.equals("g") || animal.equals("t"))){
+			System.err.println("Informe C para CACHORRO, G para GATO ou T para TODOS!");
 			animal = entradaTeclado.nextLine();
 			animal = animal.toLowerCase();
 		}
@@ -285,7 +293,14 @@ public class Auxiliar {
 	}
 	
 	public static void preenchimentoAnimColRegFinAutomatico(ColecaoAnimais colAnim, ColecaoColaboradores colColab, ColecaoRegFinanceiros colRegFin){
-		
+		colAnim.AdicionarAnimal(new Cachorro("123","Loba","f","mestiça","médio","farejador","dócil","22/02/2017","01/01/2000",new ProntuarioMedico(10, false, false, false, "saudável")));
+		colAnim.AdicionarAnimal(new Cachorro("124","Totó","m","boxer","médio","farejador","dócil","22/01/2017","05/11/2010",new ProntuarioMedico()));
+		colAnim.AdicionarAnimal(new Cachorro("125","Mustafá","m","mestiço","médio","farejador","dócil","22/03/2011","24/07/2009",new ProntuarioMedico()));
+		colAnim.AdicionarAnimal(new Gato("122","Mequetref","m","mestiço","dócil",true,"22/05/2015","24/07/2009",new ProntuarioMedico()));
+		colAnim.AdicionarAnimal(new Cachorro());
+		colAnim.AdicionarAnimal(new Gato("122","Simbasa","f","mestiço","dócil",true,"22/07/2016","21/04/2012",new ProntuarioMedico()));
+		colAnim.AdicionarAnimal(new Cachorro());
+		colAnim.AdicionarAnimal(new Gato("122","Mequetref","m","mestiço","dócil",true,"22/11/2016","18/03/2016",new ProntuarioMedico()));
 		
 	}
 }

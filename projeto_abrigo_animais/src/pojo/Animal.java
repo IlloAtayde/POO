@@ -4,6 +4,7 @@
 package pojo;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * @author illoatayde
@@ -20,15 +21,17 @@ public class Animal {
 	private LocalDate dataNascimento;
 	private ProntuarioMedico condicoesGerais;
 	
-	public Animal(String registro, String nome,String sexo, String raca, String comportamento, LocalDate dataChegada, LocalDate dataNascimento, ProntuarioMedico condicoesGerais){
+	public Animal(String registro, String nome,String sexo, String raca, String comportamento, String dataChegStr, String dataNascStr, ProntuarioMedico condicoesGerais){
 		this.registro = registro;
 		this.nome = nome;
 		this.sexo = sexo;
 		this.raca = raca;
 		this.comportamento = comportamento;
+		DateTimeFormatter dataFormato = DateTimeFormatter.ofPattern("dd'/'MM'/'yyyy");
+		this.dataChegada = LocalDate.parse(dataNascStr, dataFormato);
 		this.dataChegada = dataChegada;
 		this.dataNascimento = dataNascimento;
-		this.condicoesGerais = condicoesGerais;
+		this.condicoesGerais = new ProntuarioMedico();
 	}
 	public Animal(){
 		

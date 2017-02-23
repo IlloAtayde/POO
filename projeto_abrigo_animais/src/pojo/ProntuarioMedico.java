@@ -22,6 +22,14 @@ public class ProntuarioMedico {
 		this.castrado = castrado;
 		this.avaliacaoClinica = avaliacaoClinica;
 	}
+	
+	public ProntuarioMedico(){
+		this.peso = 10.00;
+		this.castrado = false;
+		this.vermifugado = false;
+		this.vacinado = false;
+		this.avaliacaoClinica = "Não verificado";
+	}
 
 	/**
 	 * @return the peso
