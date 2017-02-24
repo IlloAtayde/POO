@@ -45,10 +45,10 @@ public class Auxiliar {
 		switch (opcaoMenu) {
 		case 1:
 			do{
-				imprimirMenu("ANIMAIS", "ADICIONAR,REMOVER,PESQUISAR REGISTRO,QUANTIDADE SEXO,LISTAR ANIMAIS,MENU PRINCIPAL");
-				opSubMenu = capturaMenu(6);
+				imprimirMenu("ANIMAIS", "ADICIONAR,QUANTITATIVO,REMOVER,PESQUISAR REGISTRO,QUANTIDADE P/SEXO,LISTAR ANIMAIS,MENU PRINCIPAL");
+				opSubMenu = capturaMenu(7);
 				trataMenuAnimais(opSubMenu,colAnim);
-			}while(opSubMenu < 6);
+			}while(opSubMenu < 7);
 			break;
 		case 2:
 			do{
@@ -79,27 +79,31 @@ public class Auxiliar {
 	public static void trataMenuAnimais(int opMenu, ColecaoAnimais colAnim){
 		
 		switch (opMenu) {
-		case 1:
-			System.out.println("Informe C para Cachorro ou G para Gato ");
+		case 1://Insere animais
+			System.out.println("Informe C para Cachorro ou G para Gato: ");
 			colAnim.AdicionarAnimal(cadastrarAnimal(lerAnimal()));
 			break;
 		case 2:
-			
+			System.out.println("Quantitativo de animais do abrigo: ");
+			colAnim.QuanTotal();
 			break;
 		case 3:
 			
 			break;
-		case 4:
-			
+		case 4://Exibe os animais por sexo
+			System.out.println("Informe o sexo que deseja buscar: ");
+			colAnim.QuantPorSexo(lerSexo());
 			break;
-		case 5:
-			System.out.println("Informe C para Cães, G para Gatos ou T para Todos! ");
+		case 5://Exibe os animais por categoria ou todos
+			System.out.println("Informe C para Cães, G para Gatos ou T para Todos: ");
 			colAnim.ExibirAnimais(lerAnimal());
 			break;
 		case 6:
-			System.out.println("RETORNANDO AO MENU PRINCIPAL!");
+			
 			break;
 		case 7:
+			System.out.println("RETORNANDO AO MENU PRINCIPAL!");
+			break;
 			
 		default:
 			break;
@@ -297,9 +301,7 @@ public class Auxiliar {
 		colAnim.AdicionarAnimal(new Cachorro("124","Totó","m","boxer","médio","farejador","dócil","22/01/2017","05/11/2010",new ProntuarioMedico()));
 		colAnim.AdicionarAnimal(new Cachorro("125","Mustafá","m","mestiço","médio","farejador","dócil","22/03/2011","24/07/2009",new ProntuarioMedico()));
 		colAnim.AdicionarAnimal(new Gato("122","Mequetref","m","mestiço","dócil",true,"22/05/2015","24/07/2009",new ProntuarioMedico()));
-		colAnim.AdicionarAnimal(new Cachorro());
 		colAnim.AdicionarAnimal(new Gato("122","Simbasa","f","mestiço","dócil",true,"22/07/2016","21/04/2012",new ProntuarioMedico()));
-		colAnim.AdicionarAnimal(new Cachorro());
 		colAnim.AdicionarAnimal(new Gato("122","Mequetref","m","mestiço","dócil",true,"22/11/2016","18/03/2016",new ProntuarioMedico()));
 		
 	}

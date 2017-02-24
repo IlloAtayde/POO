@@ -52,7 +52,40 @@ public class ColecaoAnimais {
 		
 	}
 	
-	public void QuantPorSexo(String idAnimal, String sexo){
-		
+	public void QuanTotal(){
+		int total,femea,macho;
+		total=femea=macho=0;
+		Iterator<Animal> itAnimal = ColAnimal.iterator();
+		while (itAnimal.hasNext()) {
+			Animal aniTemp = itAnimal.next();
+			if(aniTemp.getSexo().equals("f")){
+				femea++;
+			}else{
+				macho++;
+			}
+		}
+		total = macho + femea;
+		System.out.println("Quantidade de Machos: " + macho);
+		System.out.println("Quantidade de Fêmeas: " + femea);
+		System.out.println("Total de animais: " + total);
+	}
+	
+	public void QuantPorSexo(String sexo){
+		int total = 0;
+		Iterator<Animal> itAnimal = ColAnimal.iterator();
+		while (itAnimal.hasNext()) {
+			Animal aniTemp = itAnimal.next();
+			if(aniTemp.getSexo().equals(sexo)){
+				total++;
+				System.out.println(aniTemp.toString());
+				continue;
+			}
+		}
+		if(sexo.equals("f")){
+			sexo = "fêmea(s)";
+		}else{
+			sexo = "macho(s)";
+		}
+		System.out.println("Total de " + total + " " + sexo);
 	}
 }
