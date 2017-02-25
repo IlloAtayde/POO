@@ -6,17 +6,14 @@ import java.util.List;
 
 import pojo.Animal;
 import pojo.Cachorro;
-import pojo.Colaborador;
 import pojo.Gato;
-import pojo.ServicosGerais;
-import pojo.Veterinario;
-import pojo.Voluntario;
+
 
 public class ColecaoAnimais {
 	
 	private List<Animal> ColAnimal;
 
-	public ColecaoAnimais() {
+	public ColecaoAnimais(){
 		
 		ColAnimal = new ArrayList<Animal>();
 	}
@@ -25,7 +22,20 @@ public class ColecaoAnimais {
 	}
 	public void RemoverAnimal(Animal animal){
 		ColAnimal.remove(animal);
+	}	
+	
+	public Animal PesquisarAnimal(String reg){
+		Iterator<Animal> itAnimal = ColAnimal.iterator();
+		while (itAnimal.hasNext()){
+			Animal aniTemp = itAnimal.next();
+			if (!(aniTemp.getRegistro().equals(reg))){
+				continue;
+			}
+			return aniTemp;
+		}
+		return null;
 	}
+
 	
 	public void ExibirAnimais(String idAnimal){
 		Iterator<Animal> itAnimal = ColAnimal.iterator();
@@ -52,22 +62,32 @@ public class ColecaoAnimais {
 		
 	}
 	
-	public void QuanTotal(){
-		int total,femea,macho;
-		total=femea=macho=0;
+	public void Quantitativo(){
+		int caoTotal,caoFemea,caoMacho,gatoTotal,gatoFemea,gatoMacho;
+		caoTotal=caoFemea=caoMacho=gatoTotal=gatoFemea=gatoMacho=0;
 		Iterator<Animal> itAnimal = ColAnimal.iterator();
 		while (itAnimal.hasNext()) {
 			Animal aniTemp = itAnimal.next();
-			if(aniTemp.getSexo().equals("f")){
-				femea++;
-			}else{
-				macho++;
+			if(aniTemp instanceof Cachorro){
+				if(aniTemp.getSexo().equals("f")){
+					caoFemea++;
+				}else{
+					caoMacho++;
+				}
+			}
+			if(aniTemp instanceof Gato){
+				if(aniTemp.getSexo().equals("f")){
+					gatoFemea++;
+				}else{
+					gatoMacho++;
+				}
 			}
 		}
-		total = macho + femea;
-		System.out.println("Quantidade de Machos: " + macho);
-		System.out.println("Quantidade de Fêmeas: " + femea);
-		System.out.println("Total de animais: " + total);
+		caoTotal = caoMacho + caoFemea;
+		gatoTotal = gatoFemea + gatoMacho;
+		System.out.printf("%d Gato(s): %d macho(s) e %d fêmea(s)\n",gatoTotal,gatoMacho,gatoFemea);
+		System.out.printf("%d Cão(es): %d macho(s) e %d fêmea(s)\n",caoTotal,caoMacho,caoFemea);
+		System.out.printf("Total de animal(is) no abrigo: %d\n",(caoTotal+gatoTotal));
 	}
 	
 	public void QuantPorSexo(String sexo){

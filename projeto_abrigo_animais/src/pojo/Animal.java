@@ -28,9 +28,9 @@ public class Animal {
 		this.raca = raca;
 		this.comportamento = comportamento;
 		DateTimeFormatter dataFormato = DateTimeFormatter.ofPattern("dd'/'MM'/'yyyy");
-		this.dataChegada = LocalDate.parse(dataNascStr, dataFormato);
-		this.dataChegada = dataChegada;
-		this.dataNascimento = dataNascimento;
+		this.dataChegada = LocalDate.parse(dataChegStr, dataFormato);
+		//this.dataChegada = dataChegada;
+		this.dataNascimento = LocalDate.parse(dataNascStr, dataFormato);
 		this.condicoesGerais = new ProntuarioMedico();
 	}
 	public Animal(){
@@ -151,10 +151,14 @@ public class Animal {
 	 */
 	@Override
 	public String toString() {
-		return "Animal [registro=" + registro + ", nome=" + nome + ", sexo="
-				+ sexo + ", raca=" + raca + ", comportamento=" + comportamento
-				+ ", dataChegada=" + dataChegada + ", dataNascimento="
-				+ dataNascimento + ", condicoesGerais=" + condicoesGerais + "]";
+		if(sexo.equals("f")){
+			sexo = "fêmea";
+		}else{
+			sexo = "macho";
+		}
+		return "Registro: " + registro + "\tEntrada: " + dataChegada + "\nNome: " + nome + ", "
+				+ sexo + "\tRaça: " + raca + "\tComportamento: " + comportamento
+				+  "\nNascimento: "+ dataNascimento;
 	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()

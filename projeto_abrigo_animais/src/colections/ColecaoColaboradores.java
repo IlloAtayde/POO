@@ -7,7 +7,6 @@ import java.util.List;
 import pojo.Colaborador;
 import pojo.ServicosGerais;
 import pojo.Veterinario;
-import pojo.Voluntario;
 
 public class ColecaoColaboradores {
 	
@@ -25,7 +24,8 @@ public class ColecaoColaboradores {
 	}
 	/**
 	 * Imprime relação dos colaboradores voluntários
-	
+	 *
+	 */
 	public void ExibirColVoluntarios(){
 		Iterator<Colaborador> itColab = ColColaborador.iterator();
 		while(itColab.hasNext()){
@@ -34,36 +34,59 @@ public class ColecaoColaboradores {
 				System.out.println(colabTemp.toString());
 			}
 		}
-	} */
+	}
 	/**
 	 * 
-	 * @param idColab Lista colaboradores usando como referência o inteiro passado por idColab
-	 * 0 - para Veterinario
-	 * 1 - para Voluntario
-	 * 2 - para Serviços gerais
-	 * 3 - para Todos
+	 * @param idColab Lista colaboradores usando como referência o caracter passado por idColab
+	 * v - para Veterinario
+	 * s - para Serviços gerais
+	 * t - para Todos
 	 */
-	public void ExibirColaboradores(int idColab){
+	public void ExibirColaboradores(String idColab){
 		Iterator<Colaborador> itColab = ColColaborador.iterator();
 		while (itColab.hasNext()) {
 			Colaborador colabTemp = itColab.next();
-			if ((colabTemp instanceof Veterinario) && (idColab == 0)){
-				Veterinario colabVet = (Veterinario) colabTemp;
-				System.out.println(colabVet.toString());
-			}
-			if ((colabTemp instanceof Voluntario) && (idColab == 1)){
-				Voluntario colabVol = (Voluntario) colabTemp;
-				System.out.println(colabVol.toString());
-			}
-			if ((colabTemp instanceof ServicosGerais) && (idColab == 2)){
-				ServicosGerais colabServGer = (ServicosGerais) colabTemp;
-				System.out.println(colabServGer.toString());
-			}
-			else{
+			if(!(idColab.equals("t"))){
+				if ((colabTemp instanceof Veterinario) && (idColab.equals("v"))){
+					Veterinario colabVet = (Veterinario) colabTemp;
+					System.out.println(colabVet.toString());
+				}
+				if ((colabTemp instanceof ServicosGerais) && (idColab.equals("s"))){
+					ServicosGerais colabServGer = (ServicosGerais) colabTemp;
+					System.out.println(colabServGer.toString());
+				}
+			}else{
 				System.out.println(colabTemp.toString());
 			}
 					
 		}		
 		
+	}
+	/**
+	 * 
+	 * @param doc
+	 * @return Objeto Colaborador com documento doc coincidente
+	 */
+	public Colaborador PesquisarColab(String doc){
+		Iterator<Colaborador> itColab = ColColaborador.iterator();
+		while (itColab.hasNext()){
+			Colaborador colabTemp = itColab.next();
+			if (!(colabTemp.getDocumento().equals(doc))){
+				continue;
+			}
+			return colabTemp;
+		}
+		return null;
+	}
+	
+	public void PesquisarNome(String nomeColab){
+		Iterator<Colaborador> itColab = ColColaborador.iterator();
+		while (itColab.hasNext()) {
+			Colaborador colab = itColab.next();
+			String nomeTemp = colab.getNome();
+			if(nomeTemp.toLowerCase().contains(nomeColab.toLowerCase())){
+				System.out.println(colab.toString());
+			}
+		}
 	}
 }

@@ -187,8 +187,7 @@ public class Cachorro extends Animal {
 	 */
 	@Override
 	public String toString() {
-		return "Cachorro [porte=" + porte + ", habilidades=" + habilidades
-				+ ", toString()=" + super.toString() + "]";
+		return "[Cachorro]\n" + super.toString()+ "\nPorte: " + porte + "\tHabilidades: " + habilidades +"\n"+ this.getCondicoesGerais().toString();
 	}
 
 	/* (non-Javadoc)

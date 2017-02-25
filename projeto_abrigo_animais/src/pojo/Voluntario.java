@@ -18,11 +18,12 @@ public class Voluntario extends Colaborador {
 	 * @param voluntario
 	 * @param dataEntrada 
 	 * @param endereco
+	 * @param salarioBase
 	 */
 	private String atividade;
 	
-	public Voluntario(String documento, String nome, LocalDate dataNascimento, boolean voluntario, LocalDate dataEntrada, Endereco endereco, String atividade) {
-		super(documento, nome, dataNascimento, voluntario, dataEntrada, endereco);
+	public Voluntario(String documento, String nome, String dataNascStr, boolean voluntario, Endereco endereco, String atividade) {
+		super(documento, nome, dataNascStr, voluntario, endereco);
 		this.atividade = atividade;
 	}
 
@@ -110,11 +111,11 @@ public class Voluntario extends Colaborador {
 	/* (non-Javadoc)
 	 * @see pojo.Colaborador#setDataEntrada(java.time.LocalDate)
 	 */
-	@Override
+	/*@Override
 	public void setDataEntrada(LocalDate dataEntrada) {
 		// TODO Auto-generated method stub
 		super.setDataEntrada(dataEntrada);
-	}
+	}*/
 
 	/* (non-Javadoc)
 	 * @see pojo.Colaborador#getEndereco()

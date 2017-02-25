@@ -17,7 +17,7 @@ import colections.*;
 public class Auxiliar {
 
 	static Scanner entradaTeclado = new Scanner(System.in);
-	
+	/*
 	public static void imprimirTelaInicial(){
 		LocalDate hoje = LocalDate.now();
 		System.out.printf("\tABRIGO DE ANIMAIS 0.1\n\t\t\t\t\t\t\t\t");
@@ -32,6 +32,7 @@ public class Auxiliar {
 			System.out.printf("%d - %s\n", i+1, menuTemp[i]);
 		}
 	}
+
 	public static int capturaMenu(int numOp){
 		int opMenu = lerInteiro();
 		while(!(opMenu == 10 || (0 < opMenu && opMenu <= numOp))){
@@ -40,6 +41,7 @@ public class Auxiliar {
 		}
 		return opMenu;	
 	}
+
 	public static void trataOpcaoMenu(int opcaoMenu, ColecaoAnimais colAnim, ColecaoColaboradores colColab, ColecaoRegFinanceiros colRegFin){
 		int opSubMenu = 0;
 		switch (opcaoMenu) {
@@ -76,6 +78,7 @@ public class Auxiliar {
 			break;
 		}
 	}
+
 	public static void trataMenuAnimais(int opMenu, ColecaoAnimais colAnim){
 		
 		switch (opMenu) {
@@ -159,7 +162,8 @@ public class Auxiliar {
 			break;
 		}
 	}
-	
+	*/
+	/*
 	public static Animal cadastrarAnimal(String c_ou_g){
 		System.out.println("ADICIONAR ANIMAL");
 		if(c_ou_g.equals("c")){
@@ -210,7 +214,7 @@ public class Auxiliar {
 			return null;
 		}
 	}
-	
+	*/
 	public static String lerString(){
 		
 		while(entradaTeclado.hasNextDouble() || entradaTeclado.hasNextInt()){
@@ -263,8 +267,46 @@ public class Auxiliar {
 	}
 	/**
 	 * 
-	 * @return String contendo 'c', 'g' ou 'todos'
+	 * @return String contendo 'c', 'g' ou 't'
 	 */
+	public static Animal selecionarAnimal(){
+		String animal = entradaTeclado.nextLine();
+		animal = animal.toLowerCase();
+		
+		while(!(animal.equals("c") || animal.equals("g"))){
+			System.err.println("Informe C para CACHORRO ou G para GATO!");
+			animal = entradaTeclado.nextLine();
+			animal = animal.toLowerCase();
+		}
+		if(animal.equals("c")){
+			Cachorro c = new Cachorro();
+			return c;
+		}else{
+			Gato g = new Gato();
+			return g;
+		}
+		
+	}
+
+	public static Colaborador selecionarColab(){
+		String colab = entradaTeclado.nextLine();
+		colab = colab.toLowerCase();
+		
+		while(!(colab.equals("v") || colab.equals("s"))){
+			System.err.println("Informe V para VETERINÁRIO ou S para SERVIÇO GERAIS!");
+			colab = entradaTeclado.nextLine();
+			colab = colab.toLowerCase();
+		}
+		if(colab.equals("v")){
+			Veterinario vet = new Veterinario();
+			return vet;
+		}else{
+			ServicosGerais ser = new ServicosGerais();
+			return ser;
+		}
+		
+	}
+	
 	public static String lerAnimal(){
 		String animal = entradaTeclado.nextLine();
 		animal = animal.toLowerCase();
@@ -275,6 +317,18 @@ public class Auxiliar {
 			animal = animal.toLowerCase();
 		}
 		return animal;
+	}
+	
+	public static String lerColab(){
+		String colab = entradaTeclado.nextLine();
+		colab = colab.toLowerCase();
+		
+		while(!(colab.equals("v") || colab.equals("s") || colab.equals("t"))){
+			System.err.println("Informe V para VETERINÁRIO, S para SERVIÇOS GERAIS ou T para TODOS!");
+			colab = entradaTeclado.nextLine();
+			colab = colab.toLowerCase();
+		}
+		return colab;
 	}
 	
 	public static String lerInteiroToString(){
@@ -288,21 +342,36 @@ public class Auxiliar {
 		return intToStrLido;
 	}
 	
-	public static LocalDate lerData(String dataStr){//Data de entrada no formato dd/MM/aaaa
-		
-		LocalDate dataTemp;
+	public static LocalDate lerData(){//Data de entrada no formato dd/MM/aaaa
+		LocalDate dataTemp = LocalDate.now();
 		DateTimeFormatter dataFormato = DateTimeFormatter.ofPattern("dd'/'MM'/'yyyy");
-		dataTemp = LocalDate.parse(dataStr,dataFormato);
+		try{
+		dataTemp = LocalDate.parse(lerString(),dataFormato);
+		}
+		catch(java.time.format.DateTimeParseException e){
+			System.err.printf("Data inválida!\nDigite uma data válida: ");
+			lerData();
+		}
 		return dataTemp;
 	}
 	
-	public static void preenchimentoAnimColRegFinAutomatico(ColecaoAnimais colAnim, ColecaoColaboradores colColab, ColecaoRegFinanceiros colRegFin){
+	public static void preenchimentoAutomatico(ColecaoAnimais colAnim, ColecaoColaboradores colColab, ColecaoRegFinanceiros colRegFin){
 		colAnim.AdicionarAnimal(new Cachorro("123","Loba","f","mestiça","médio","farejador","dócil","22/02/2017","01/01/2000",new ProntuarioMedico(10, false, false, false, "saudável")));
 		colAnim.AdicionarAnimal(new Cachorro("124","Totó","m","boxer","médio","farejador","dócil","22/01/2017","05/11/2010",new ProntuarioMedico()));
 		colAnim.AdicionarAnimal(new Cachorro("125","Mustafá","m","mestiço","médio","farejador","dócil","22/03/2011","24/07/2009",new ProntuarioMedico()));
 		colAnim.AdicionarAnimal(new Gato("122","Mequetref","m","mestiço","dócil",true,"22/05/2015","24/07/2009",new ProntuarioMedico()));
 		colAnim.AdicionarAnimal(new Gato("122","Simbasa","f","mestiço","dócil",true,"22/07/2016","21/04/2012",new ProntuarioMedico()));
 		colAnim.AdicionarAnimal(new Gato("122","Mequetref","m","mestiço","dócil",true,"22/11/2016","18/03/2016",new ProntuarioMedico()));
+
+		colColab.AdicionarColaborador(new Veterinario("333", "João Pessoa", "01/10/1969", true, new Endereco(), "155", "Clínico Geral"));
+		colColab.AdicionarColaborador(new Veterinario("221", "Almeida Campus", "13/01/1975", false, new Endereco(), "425", "Clínico Geral"));
+		colColab.AdicionarColaborador(new Veterinario("543", "Amélia Navarro", "05/02/1973", true, new Endereco(), "445", "Clínico Geral"));
+		colColab.AdicionarColaborador(new Veterinario("679", "Pedro Santos Trigueiro", "30/05/1960", false, new Endereco(), "455", "Clínico Geral"));
+		colColab.AdicionarColaborador(new Veterinario("298", "João Antônio Neto", "24/07/1980", true, new Endereco(), "400", "Clínico Geral"));
+		colColab.AdicionarColaborador(new ServicosGerais("2210","Pedro Paulo Júnior","23/03/1998",false,new Endereco(),"Tosador"));
+		colColab.AdicionarColaborador(new ServicosGerais("2321","Mariana Carla","23/03/1995",true,new Endereco(),"Tosador"));
+		colColab.AdicionarColaborador(new ServicosGerais("1023","Carlos Timóteo Júnior","23/03/1990",false,new Endereco(),"Tosador"));
+		colColab.AdicionarColaborador(new ServicosGerais("0987","Henrique Velasco Silva","23/03/2000",true,new Endereco(),"Tosador"));
 		
 	}
 }

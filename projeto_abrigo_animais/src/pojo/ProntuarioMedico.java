@@ -106,7 +106,23 @@ public class ProntuarioMedico {
 	 */
 	@Override
 	public String toString() {
-		return "ProntuarioMedico [peso=" + peso + ", vacinado=" + vacinado
+		String vac,cast,verm;
+		if(this.isCastrado()){
+			 cast = "SIM";
+		}else{
+			cast = "NÃO";
+		}
+		if(this.isVacinado()){
+			vac = "SIM";
+		}else{
+			vac = "NÃO";
+		}
+		if(this.isVermifugado()){
+			verm = "SIM";
+		}else{
+			verm = "NÃO";
+		}
+		return "[Avaliação Clinica]\nPeso: " + peso + ", vacinado=" + vacinado
 				+ ", vermifugado=" + vermifugado + ", castrado=" + castrado
 				+ ", avaliacaoClinica=" + avaliacaoClinica + "]";
 	}

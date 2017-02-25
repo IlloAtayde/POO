@@ -4,6 +4,7 @@
 package pojo;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * @author illoatayde
@@ -17,16 +18,33 @@ public class Colaborador {
 	private boolean voluntario;
 	private LocalDate dataEntrada;
 	private Endereco endereco;
+	private double salarioBase;
 	
-	public Colaborador(String documento, String nome, LocalDate dataNascimento, boolean voluntario, LocalDate dataEntrada, Endereco endereco){
+	public Colaborador(String documento, String nome, String dataNascStr, boolean voluntario, Endereco endereco){
 		this.documento = documento;
 		this.nome = nome;
-		this.dataNascimento = dataNascimento;
+		DateTimeFormatter dataFormato = DateTimeFormatter.ofPattern("dd'/'MM'/'yyyy");
+		this.dataNascimento = LocalDate.parse(dataNascStr, dataFormato);
 		this.voluntario = voluntario;
-		this.dataEntrada = dataEntrada;
+		this.dataEntrada = LocalDate.now();
 		this.endereco = endereco;
+		if(this.isVoluntario()){
+			this.salarioBase = 0.00;
+		}else{
+			this.salarioBase = 880.00;			
+		}
 	}
 
+	public Colaborador(){
+		this.documento = "VAZIO";
+		this.nome = "VAZIO";
+		this.dataNascimento = LocalDate.now();
+		this.voluntario = true;
+		this.dataEntrada = LocalDate.now();
+		this.endereco = new Endereco();
+		this.salarioBase = 0.00;
+	}
+	
 	/**
 	 * @return the documento
 	 */
@@ -92,10 +110,10 @@ public class Colaborador {
 
 	/**
 	 * @param dataEntrada the dataEntrada to set
-	 */
+	 *//*
 	public void setDataEntrada(LocalDate dataEntrada) {
 		this.dataEntrada = dataEntrada;
-	}
+	}*/
 
 	/**
 	 * @return the endereco
@@ -111,6 +129,20 @@ public class Colaborador {
 		this.endereco = endereco;
 	}
 
+	/**
+	 * @return the salarioBase
+	 */
+	public double getSalarioBase() {
+		return salarioBase;
+	}
+
+	/**
+	 * @param salarioBase the salarioBase to set
+	 */
+	public void setSalarioBase(double salarioBase) {
+		this.salarioBase = salarioBase;
+	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -119,7 +151,7 @@ public class Colaborador {
 		return "Colaborador [documento=" + documento + ", nome=" + nome
 				+ ", dataNascimento=" + dataNascimento + ", voluntario="
 				+ voluntario + ", dataEntrada=" + dataEntrada + ", endereco="
-				+ endereco + "]";
+				+ endereco + ", salarioBase=" + salarioBase + "]";
 	}
 
 	/* (non-Javadoc)
@@ -138,6 +170,9 @@ public class Colaborador {
 		result = prime * result
 				+ ((endereco == null) ? 0 : endereco.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(salarioBase);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + (voluntario ? 1231 : 1237);
 		return result;
 	}
@@ -192,9 +227,14 @@ public class Colaborador {
 		} else if (!nome.equals(other.nome)) {
 			return false;
 		}
+		if (Double.doubleToLongBits(salarioBase) != Double
+				.doubleToLongBits(other.salarioBase)) {
+			return false;
+		}
 		if (voluntario != other.voluntario) {
 			return false;
 		}
 		return true;
 	}
+
 }

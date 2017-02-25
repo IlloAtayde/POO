@@ -22,15 +22,19 @@ public class Veterinario extends Colaborador {
 	
 	private String crmv;
 	private String especialidade;
-	private double salario;
+	//private double salario;
 	
-	public Veterinario(String documento, String nome, LocalDate dataNascimento, boolean voluntario, LocalDate dataEntrada, Endereco endereco, String crmv, String especialidade, double salario) {
-		super(documento, nome, dataNascimento, voluntario, dataEntrada, endereco);
+	public Veterinario(String documento, String nome, String dataNasc, boolean voluntario, Endereco endereco, String crmv, String especialidade) {
+		super(documento, nome, dataNasc, voluntario, endereco);
 		this.crmv = crmv;
 		this.especialidade = especialidade;
-		this.salario = salario;
+		//this.salario = super.getSalarioBase() * 5;
 	}
-
+	
+	public Veterinario(){
+		
+	}
+	
 	/* (non-Javadoc)
 	 * @see pojo.Colaborador#getDocumento()
 	 */
@@ -115,11 +119,11 @@ public class Veterinario extends Colaborador {
 	/* (non-Javadoc)
 	 * @see pojo.Colaborador#setDataEntrada(java.time.LocalDate)
 	 */
-	@Override
+	/*@Override
 	public void setDataEntrada(LocalDate dataEntrada) {
 		// TODO Auto-generated method stub
 		super.setDataEntrada(dataEntrada);
-	}
+	}*/
 
 	/* (non-Javadoc)
 	 * @see pojo.Colaborador#getEndereco()
@@ -139,13 +143,57 @@ public class Veterinario extends Colaborador {
 		super.setEndereco(endereco);
 	}
 
+	/**
+	 * @return the crmv
+	 */
+	public String getCrmv() {
+		return crmv;
+	}
+
+	/**
+	 * @param crmv the crmv to set
+	 */
+	public void setCrmv(String crmv) {
+		this.crmv = crmv;
+	}
+
+	/**
+	 * @return the especialidade
+	 */
+	public String getEspecialidade() {
+		return especialidade;
+	}
+
+	/**
+	 * @param especialidade the especialidade to set
+	 */
+	public void setEspecialidade(String especialidade) {
+		this.especialidade = especialidade;
+	}
+
+	/**
+	 * @return the salario
+	 */
+	@Override
+	public double getSalarioBase() {
+		return super.getSalarioBase()*5;
+	}
+
+	/**
+	 * @param salario the salario to set
+	 */
+	/*
+	public void setSalario(double salario) {
+		this.salario = salario;
+	}*/
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
 		return "Veterinario [crmv=" + crmv + ", especialidade=" + especialidade
-				+ ", salario=" + salario + ", toString()=" + super.toString()
+				+ ", salario=" + this.getSalarioBase() + ", toString()=" + super.toString()
 				+ "]";
 	}
 
@@ -159,9 +207,6 @@ public class Veterinario extends Colaborador {
 		result = prime * result + ((crmv == null) ? 0 : crmv.hashCode());
 		result = prime * result
 				+ ((especialidade == null) ? 0 : especialidade.hashCode());
-		long temp;
-		temp = Double.doubleToLongBits(salario);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
 		return result;
 	}
 
@@ -194,11 +239,9 @@ public class Veterinario extends Colaborador {
 		} else if (!especialidade.equals(other.especialidade)) {
 			return false;
 		}
-		if (Double.doubleToLongBits(salario) != Double
-				.doubleToLongBits(other.salario)) {
-			return false;
-		}
 		return true;
 	}
+
+
 
 }

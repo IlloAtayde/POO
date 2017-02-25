@@ -19,15 +19,16 @@ public class ServicosGerais extends Colaborador {
 	 */
 	
 	private String atividade;
-	private double salario;
 
-	public ServicosGerais(String documento, String nome, LocalDate dataNascimento, boolean voluntario, LocalDate dataEntrada, Endereco endereco, String atividade, double salario) {
-		super(documento, nome, dataNascimento, voluntario, dataEntrada, endereco);
+	public ServicosGerais(String documento, String nome, String dataNascStr, boolean voluntario, Endereco endereco, String atividade) {
+		super(documento, nome, dataNascStr, voluntario, endereco);
 		this.atividade = atividade;
-		this.salario = salario;
 		// TODO Auto-generated constructor stub
 	}
-	
+
+	public ServicosGerais(){
+		
+	}
 
 	/**
 	 * @return the atividade
@@ -48,17 +49,19 @@ public class ServicosGerais extends Colaborador {
 	/**
 	 * @return the salario
 	 */
-	public double getSalario() {
-		return salario;
+	@Override
+	public double getSalarioBase() {
+		return super.getSalarioBase() * 1.5;
 	}
 
-
+	
 	/**
 	 * @param salario the salario to set
 	 */
+	/*
 	public void setSalario(double salario) {
 		this.salario = salario;
-	}
+	}*/
 
 
 	/* (non-Javadoc)
@@ -146,11 +149,11 @@ public class ServicosGerais extends Colaborador {
 	/* (non-Javadoc)
 	 * @see pojo.Colaborador#setDataEntrada(java.time.LocalDate)
 	 */
-	@Override
+	/*@Override
 	public void setDataEntrada(LocalDate dataEntrada) {
 		// TODO Auto-generated method stub
 		super.setDataEntrada(dataEntrada);
-	}
+	}*/
 
 
 	/* (non-Javadoc)
@@ -178,7 +181,7 @@ public class ServicosGerais extends Colaborador {
 	@Override
 	public String toString() {
 		return "ServicosGerais [atividade=" + atividade + ", salario="
-				+ salario + ", toString()=" + super.toString() + "]";
+				+ this.getSalarioBase() + ", toString()=" + super.toString() + "]";
 	}
 
 
@@ -191,9 +194,6 @@ public class ServicosGerais extends Colaborador {
 		int result = super.hashCode();
 		result = prime * result
 				+ ((atividade == null) ? 0 : atividade.hashCode());
-		long temp;
-		temp = Double.doubleToLongBits(salario);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
 		return result;
 	}
 
@@ -220,11 +220,9 @@ public class ServicosGerais extends Colaborador {
 		} else if (!atividade.equals(other.atividade)) {
 			return false;
 		}
-		if (Double.doubleToLongBits(salario) != Double
-				.doubleToLongBits(other.salario)) {
-			return false;
-		}
 		return true;
 	}
+
+
 
 }
