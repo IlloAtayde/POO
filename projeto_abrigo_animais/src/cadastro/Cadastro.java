@@ -5,6 +5,7 @@ import pojo.Cachorro;
 import pojo.Colaborador;
 import pojo.Endereco;
 import pojo.Gato;
+import pojo.RegFinanceiro;
 import pojo.ServicosGerais;
 import pojo.Veterinario;
 import principal.Auxiliar;
@@ -49,7 +50,7 @@ public class Cadastro {
 	public static Colaborador cadastrarColaborador(Colaborador col) {
 			
 		System.out.println("Documento: ");
-		col.setDocumento(Auxiliar.lerString());
+		col.setDocumento(Auxiliar.lerInteiroToString());
 		System.out.println("Nome: ");
 		col.setNome(Auxiliar.lerString());
 		System.out.println("Data de nascimento: ");
@@ -62,7 +63,7 @@ public class Cadastro {
 		if(col instanceof Veterinario){
 			Veterinario vet = (Veterinario) col;
 			System.out.println("CRMV: ");
-			vet.setCrmv(Auxiliar.lerString());
+			vet.setCrmv(Auxiliar.lerInteiroToString());
 			System.out.println("Especialidade:");
 			vet.setEspecialidade(Auxiliar.lerString());
 			return vet;
@@ -76,6 +77,17 @@ public class Cadastro {
 		return col;
 	}
 
+	public static RegFinanceiro cadastrarRegFinanceiro(){
+		RegFinanceiro regFin = new RegFinanceiro();
+		System.out.println("Insira a data:");
+		regFin.setData(Auxiliar.lerData());
+		System.out.println("Insira o valor:");
+		regFin.setValor(Auxiliar.lerDouble());
+		System.out.println("Insira a descrição:");
+		regFin.setDescricao(Auxiliar.lerString());
+		return regFin;
+	}
+	
 	public static Endereco cadastrarEndereco(){
 		Endereco e = new Endereco();
 		System.out.println("ADICIONAR ENDEREÇO:");

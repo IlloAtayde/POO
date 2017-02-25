@@ -16,8 +16,11 @@ public class ColecaoColaboradores {
 		
 		ColColaborador = new ArrayList<Colaborador>();
 	}
-	public void AdicionarColaborador(Colaborador colaborador){
-		ColColaborador.add(colaborador);
+	public boolean AdicionarColaborador(Colaborador colaborador){
+		if(ColColaborador.add(colaborador)){
+			return true;
+		}
+		return false;
 	}
 	public void RemoverColaborador(Colaborador colaborador){
 		ColColaborador.remove(colaborador);
@@ -78,7 +81,10 @@ public class ColecaoColaboradores {
 		}
 		return null;
 	}
-	
+	/**
+	 * 
+	 * @param nomeColab Exibe os colaboradores que contém nomeColab em seu nome
+	 */
 	public void PesquisarNome(String nomeColab){
 		Iterator<Colaborador> itColab = ColColaborador.iterator();
 		while (itColab.hasNext()) {

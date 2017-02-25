@@ -122,9 +122,9 @@ public class ProntuarioMedico {
 		}else{
 			verm = "NÃO";
 		}
-		return "[Avaliação Clinica]\nPeso: " + peso + ", vacinado=" + vacinado
-				+ ", vermifugado=" + vermifugado + ", castrado=" + castrado
-				+ ", avaliacaoClinica=" + avaliacaoClinica + "]";
+		return "\n-- Avaliação Clínica --\nPeso: " + peso + "\nvacinado: " + vac
+				+ " vermifugado: " + verm + " castrado: " + cast
+				+ "\nCondições gerais: " + avaliacaoClinica;
 	}
 
 	/* (non-Javadoc)

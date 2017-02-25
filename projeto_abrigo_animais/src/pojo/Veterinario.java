@@ -192,9 +192,7 @@ public class Veterinario extends Colaborador {
 	 */
 	@Override
 	public String toString() {
-		return "Veterinario [crmv=" + crmv + ", especialidade=" + especialidade
-				+ ", salario=" + this.getSalarioBase() + ", toString()=" + super.toString()
-				+ "]";
+		return "\n[Veterinario] \nCRMV: " + crmv + "\tEspecialidade: " + especialidade + "\n" + super.toString();
 	}
 
 	/* (non-Javadoc)

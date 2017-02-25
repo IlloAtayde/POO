@@ -148,10 +148,14 @@ public class Colaborador {
 	 */
 	@Override
 	public String toString() {
-		return "Colaborador [documento=" + documento + ", nome=" + nome
-				+ ", dataNascimento=" + dataNascimento + ", voluntario="
-				+ voluntario + ", dataEntrada=" + dataEntrada + ", endereco="
-				+ endereco + ", salarioBase=" + salarioBase + "]";
+		String vol;
+		if(this.isVoluntario()){
+			vol = "SIM";
+		}else{
+			vol = "NÃO";
+		}
+		return "Entrada: " + dataEntrada +  "\tDocumento: " + documento + "\nNome: " + nome + "\tNascimento: " + dataNascimento + "\nVoluntario: "
+				+ vol  + "\n\n-- Endereco --\n"	+ endereco;
 	}
 
 	/* (non-Javadoc)

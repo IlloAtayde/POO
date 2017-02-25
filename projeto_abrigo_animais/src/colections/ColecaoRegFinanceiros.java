@@ -25,7 +25,6 @@ public class ColecaoRegFinanceiros {
 		while(itRegFin.hasNext()){
 			RegFinanceiro regFinTemp = itRegFin.next();
 			saldo += regFinTemp.getValor();
-
 		}
 		return saldo;
 	}
@@ -35,6 +34,34 @@ public class ColecaoRegFinanceiros {
 			RegFinanceiro regFinTemp = itRegFin.next();
 			System.out.println(regFinTemp.toString());
 		}
-		System.out.println("Total " + RetornarSaldo());
+		System.out.printf("Saldo Total: %.2f\n",RetornarSaldo());
+	}
+	
+	public void ExibirEntradas(){
+		Iterator<RegFinanceiro> itRegFin = ColRegFinanceiro.iterator();
+		double saldoTemp = 0;
+		while(itRegFin.hasNext()){
+			RegFinanceiro regFinTemp = itRegFin.next();
+			if(regFinTemp.getValor() > 0.00){
+				saldoTemp += regFinTemp.getValor();
+				System.out.println(regFinTemp.toString());
+			}
+			
+		}
+		System.out.printf("Total de entradas: %.2f\n",saldoTemp);
+	}
+	
+	public void ExibirSaidas(){
+		Iterator<RegFinanceiro> itRegFin = ColRegFinanceiro.iterator();
+		double saldoTemp = 0;
+		while(itRegFin.hasNext()){
+			RegFinanceiro regFinTemp = itRegFin.next();
+			if(regFinTemp.getValor() < 0.00){
+				saldoTemp += regFinTemp.getValor();
+				System.out.println(regFinTemp.toString());
+			}
+			
+		}
+		System.out.printf("Total de saídas: %.2f\n",saldoTemp);
 	}
 }

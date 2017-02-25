@@ -55,10 +55,10 @@ public class Menu {
 			break;
 		case 3:
 			do{
-				imprimirMenu("REGISTRO FIANCEIRO","ADICIONAR,REMOVER,LISTAR,SALDO,POR DATA,MENU PRINCIPAL");
-				opSubMenu = capturaMenu(6);
+				imprimirMenu("REGISTRO FIANCEIRO","ADICIONAR,EXTRATO,SALDO,ENTRADAS,SAÍDAS,POR DATA,MENU PRINCIPAL");
+				opSubMenu = capturaMenu(7);
 				trataMenuRegFin(opSubMenu,colRegFin);
-			}while(opSubMenu < 6);
+			}while(opSubMenu < 7);
 			break;
 		case 4:
 			System.out.println("SAINDO DO SISTEMA!");
@@ -147,19 +147,24 @@ public class Menu {
 		
 		switch (opMenu) {
 		case 1:
-			
+			System.out.println("ADICIONAR REGISTRO:");
+			colRegFin.AdicionarRegFin(Cadastro.cadastrarRegFinanceiro());
 			break;
 		case 2:
-			
+			System.out.println("EXTRATO:");
+			colRegFin.ExibirExtrato();
 			break;
 		case 3:
-			
+			System.out.println("SALDO:");
+			System.out.printf("%.2f",colRegFin.RetornarSaldo());
 			break;
 		case 4:
-			
+			System.out.println("ENTRADAS:");
+			colRegFin.ExibirEntradas();
 			break;
 		case 5:
-			
+			System.out.println("SAÍDAS:");
+			colRegFin.ExibirSaidas();
 			break;
 		case 6:
 			

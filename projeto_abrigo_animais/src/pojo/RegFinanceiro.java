@@ -1,6 +1,7 @@
 package pojo;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class RegFinanceiro {
 
@@ -8,12 +9,18 @@ public class RegFinanceiro {
 	private double valor;
 	private String descricao;
 	
-	public RegFinanceiro(LocalDate data, double valor, String descricao) {
-		this.data = data;
+	public RegFinanceiro(String data, double valor, String descricao) {
+		DateTimeFormatter dataFormato = DateTimeFormatter.ofPattern("dd'/'MM'/'yyyy");
+		this.data = LocalDate.parse(data, dataFormato);
 		this.valor = valor;
 		this.descricao = descricao;
 	}
 
+	public RegFinanceiro(){
+		this.data = LocalDate.now();
+		this.valor = 0.00;
+		this.descricao = "Nenhuma descrição";
+	}
 	/**
 	 * @return the data
 	 */
@@ -61,8 +68,7 @@ public class RegFinanceiro {
 	 */
 	@Override
 	public String toString() {
-		return "RegFinanceiro [data=" + data + ", valor=" + valor
-				+ ", descricao=" + descricao + "]";
+		return "\n[Registro Financeiro]\nData: " + data + "\nDescrição: " + descricao +  "\nValor: " + valor;
 	}
 
 	/* (non-Javadoc)

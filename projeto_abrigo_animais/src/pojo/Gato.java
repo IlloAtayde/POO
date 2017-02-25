@@ -175,8 +175,13 @@ public class Gato extends Animal {
 	 */
 	@Override
 	public String toString() {
-		return "Gato [vomitaBoladePelos=" + vomitaBoladePelos + ", toString()="
-				+ super.toString() + "]";
+		String vbp;
+		if(this.isVomitaBoladePelos()){
+			vbp = "SIM";
+		}else{
+			vbp = "NÃO";
+		}
+		return "\n[Gato]\n" + super.toString()+ "\nVomita bola de pelos: " + vbp +"\n"+ this.getCondicoesGerais().toString();
 	}
 
 	/* (non-Javadoc)

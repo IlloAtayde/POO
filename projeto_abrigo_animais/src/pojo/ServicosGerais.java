@@ -180,8 +180,7 @@ public class ServicosGerais extends Colaborador {
 	 */
 	@Override
 	public String toString() {
-		return "ServicosGerais [atividade=" + atividade + ", salario="
-				+ this.getSalarioBase() + ", toString()=" + super.toString() + "]";
+		return "\n["+ atividade +"]" + "\n" + super.toString();
 	}
 
 

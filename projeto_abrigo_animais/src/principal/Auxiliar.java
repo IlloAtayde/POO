@@ -237,6 +237,17 @@ public class Auxiliar {
 		return intLido;
 	}
 	
+	public static double lerDouble(){
+		
+		while(!entradaTeclado.hasNextDouble()){
+			System.err.println("Entrada iválida!");
+			entradaTeclado.nextLine();			
+		}
+		double doubleLido = entradaTeclado.nextDouble();
+		entradaTeclado.nextLine();
+		return doubleLido;
+	}
+	
 	public static String lerSexo(){
 		
 		String sexo = entradaTeclado.nextLine();
@@ -372,6 +383,17 @@ public class Auxiliar {
 		colColab.AdicionarColaborador(new ServicosGerais("2321","Mariana Carla","23/03/1995",true,new Endereco(),"Tosador"));
 		colColab.AdicionarColaborador(new ServicosGerais("1023","Carlos Timóteo Júnior","23/03/1990",false,new Endereco(),"Tosador"));
 		colColab.AdicionarColaborador(new ServicosGerais("0987","Henrique Velasco Silva","23/03/2000",true,new Endereco(),"Tosador"));
+		
+		colRegFin.AdicionarRegFin(new RegFinanceiro("11/12/2000", 500.00, "Doação do Governo Federal"));
+		colRegFin.AdicionarRegFin(new RegFinanceiro("01/01/2001", -100.00, "Compra de ração"));
+		colRegFin.AdicionarRegFin(new RegFinanceiro("06/01/2001", -30.00, "Pagamento da conta de água"));
+		colRegFin.AdicionarRegFin(new RegFinanceiro("11/01/2001", 60.00, "Doação do Município"));
+		colRegFin.AdicionarRegFin(new RegFinanceiro("06/02/2001", -43.00, "Pagamento da conta de água"));
+		colRegFin.AdicionarRegFin(new RegFinanceiro("11/12/2000", 500.00, "Doação do Governo Federal"));
+		colRegFin.AdicionarRegFin(new RegFinanceiro("06/03/2001", -50.00, "Pagamento da conta de água"));
+		colRegFin.AdicionarRegFin(new RegFinanceiro("11/12/2000", 500.00, "Doação do Governo Federal"));
+		colRegFin.AdicionarRegFin(new RegFinanceiro("06/04/2001", -34.00, "Pagamento da conta de água"));
+		colRegFin.AdicionarRegFin(new RegFinanceiro("11/12/2000", 500.00, "Doação do Governo Federal"));
 		
 	}
 }
