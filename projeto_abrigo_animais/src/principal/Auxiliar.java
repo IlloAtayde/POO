@@ -147,12 +147,12 @@ public class Auxiliar {
 	 */
 	
 	public static void preenchimentoAutomatico(ColecaoAnimais colAnim, ColecaoColaboradores colColab, ColecaoRegFinanceiros colRegFin){
-		colAnim.AdicionarAnimal(new Cachorro(Registro.GerarRegistroCachorro(),"Loba","f","mestiça","médio","farejador","dócil","22/02/2017","01/01/2000",new ProntuarioMedico(10, true, true, true, "saudável")));
-		colAnim.AdicionarAnimal(new Cachorro(Registro.GerarRegistroCachorro(),"Totó","m","boxer","médio","farejador","dócil","22/01/2017","05/11/2010",new ProntuarioMedico()));
-		colAnim.AdicionarAnimal(new Cachorro(Registro.GerarRegistroCachorro(),"Mustafá","m","mestiço","médio","farejador","dócil","22/03/2011","24/07/2009",new ProntuarioMedico()));
-		colAnim.AdicionarAnimal(new Gato(Registro.GerarRegistroGato(),"Mequetref","m","mestiço","dócil",true,"22/05/2015","24/07/2009",new ProntuarioMedico(8, false, false, false, "doente")));
-		colAnim.AdicionarAnimal(new Gato(Registro.GerarRegistroGato(),"Simbasa","f","mestiço","dócil",true,"22/07/2016","21/04/2012",new ProntuarioMedico()));
-		colAnim.AdicionarAnimal(new Gato(Registro.GerarRegistroGato(),"Mequetref","m","mestiço","dócil",true,"22/11/2016","18/03/2016",new ProntuarioMedico(5, true, false, true, "saudável")));
+		colAnim.AdicionarAnimal(new Cachorro("20173DOG1","Loba","f","mestiça","médio","farejador","dócil","22/02/2017","01/01/2000",new ProntuarioMedico(10, true, true, true, "saudável")));
+		colAnim.AdicionarAnimal(new Cachorro("20173DOG2","Totó","m","boxer","médio","farejador","dócil","22/01/2017","05/11/2010",new ProntuarioMedico()));
+		colAnim.AdicionarAnimal(new Cachorro("20173DOG3","Mustafá","m","mestiço","médio","farejador","dócil","22/03/2011","24/07/2009",new ProntuarioMedico()));
+		colAnim.AdicionarAnimal(new Gato("20173CAT1","Mequetref","m","mestiço","dócil",true,"22/05/2015","24/07/2009",new ProntuarioMedico(8, false, false, false, "doente")));
+		colAnim.AdicionarAnimal(new Gato("20173CAT2","Simbasa","f","mestiço","dócil",true,"22/07/2016","21/04/2012",new ProntuarioMedico()));
+		colAnim.AdicionarAnimal(new Gato("20173CAT3","Mequetref","m","mestiço","dócil",true,"22/11/2016","18/03/2016",new ProntuarioMedico(5, true, false, true, "saudável")));
 
 		colColab.AdicionarColaborador(new Veterinario("333", "João Pessoa", "01/10/1969", true, new Endereco(), "155", "Clínico Geral"));
 		colColab.AdicionarColaborador(new Veterinario("221", "Almeida Campus", "13/01/1975", false, new Endereco(), "425", "Clínico Geral"));

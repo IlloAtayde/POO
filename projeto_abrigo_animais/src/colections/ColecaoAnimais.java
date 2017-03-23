@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import cadastro.Registro;
+
 import pojo.Animal;
 import pojo.Cachorro;
 import pojo.Gato;
@@ -15,6 +17,7 @@ import streams.Arquivos;
 public class ColecaoAnimais {
 	
 	private List<Animal> ColAnimal;
+	private int iDG,iDC;	
 
 	public ColecaoAnimais(){
 		
@@ -25,9 +28,23 @@ public class ColecaoAnimais {
 	}
 	public void RemoverAnimal(Animal animal){
 		ColAnimal.remove(animal);
-	}	
+	}
+	public Boolean EstahVazia() {
+		return ColAnimal.isEmpty();		
+	}
+	
+	public int getIDG(){
+		return this.iDG;
+	}
+	
+	public int getIDC(){
+		return this.iDC;
+	}
 	
 	public Animal PesquisarAnimal(String reg) throws Exception{
+		if(EstahVazia()){
+			throw new Exception("Lista de animais está VAZIA!");
+		}
 		Iterator<Animal> itAnimal = ColAnimal.iterator();
 		while (itAnimal.hasNext()){
 			Animal aniTemp = itAnimal.next();
@@ -40,7 +57,10 @@ public class ColecaoAnimais {
 	}
 
 	
-	public void ExibirAnimais(String idAnimal){
+	public void ExibirAnimais(String idAnimal) throws Exception{
+		if(EstahVazia()){
+			throw new Exception("Lista de animais está VAZIA!");
+		}
 		Iterator<Animal> itAnimal = ColAnimal.iterator();
 		while (itAnimal.hasNext()) {
 			Animal aniTemp = itAnimal.next();
@@ -65,7 +85,10 @@ public class ColecaoAnimais {
 		
 	}
 	
-	public void Quantitativo(){
+	public void Quantitativo() throws Exception{
+		if(EstahVazia()){
+			throw new Exception("Lista de animais está VAZIA!");
+		}
 		int caoTotal,caoFemea,caoMacho,gatoTotal,gatoFemea,gatoMacho;
 		caoTotal=caoFemea=caoMacho=gatoTotal=gatoFemea=gatoMacho=0;
 		Iterator<Animal> itAnimal = ColAnimal.iterator();
@@ -93,7 +116,10 @@ public class ColecaoAnimais {
 		System.out.printf("Total de animal(is) no abrigo: %d\n",(caoTotal+gatoTotal));
 	}
 	
-	public void QuantPorSexo(String sexo){
+	public void QuantPorSexo(String sexo) throws Exception{
+		if(EstahVazia()){
+			throw new Exception("Lista de animais está VAZIA!");
+		}
 		int total = 0;
 		Iterator<Animal> itAnimal = ColAnimal.iterator();
 		while (itAnimal.hasNext()) {
@@ -112,7 +138,10 @@ public class ColecaoAnimais {
 		System.out.println("Total de " + total + " " + sexo);
 	}
 	
-	public void ListarVaci_Cast_Verm(){
+	public void ListarVaci_Cast_Verm() throws Exception{
+		if(EstahVazia()){
+			throw new Exception("Lista de animais está VAZIA!");
+		}
 		Iterator<Animal> itAnimal = ColAnimal.iterator();
 		while (itAnimal.hasNext()) {
 			Animal aniTemp = itAnimal.next();
@@ -131,6 +160,33 @@ public class ColecaoAnimais {
 			logAnimais += aniTemp.getRegistro() + " " + aniTemp.getSexo() + " " + aniTemp.getRaca() + "</p><p>";
 		}
 		return logAnimais;
+	}
+	
+	public void PegarNumRegAni() throws Exception{
+		if(EstahVazia()){
+			throw new Exception("Lista de animais está VAZIA!");
+		}
+		Iterator<Animal> itAnimal = ColAnimal.iterator();
+		int maiorDog= 0;
+		int maiorCat= 0;
+		while (itAnimal.hasNext()) 
+		{
+			Animal aniTemp = itAnimal.next();	
+			if(aniTemp.getRegistro().contains("DOG")){
+				int numDog = Integer.parseInt(aniTemp.getRegistro().substring(8));
+				if(numDog > maiorDog){
+					maiorDog = numDog;
+				}
+			}else{
+				int numCat = Integer.parseInt(aniTemp.getRegistro().substring(8));
+				if(numCat > maiorCat){
+					maiorCat = numCat;
+				}				
+			}		
+		}
+		this.iDG = maiorDog;
+		this.iDC = maiorCat;
+		//Registro reg = new Registro(maiorDog, maiorCat);
 	}
 
 	public void SalvarColAnimais(String nomeArq) throws IOException, FileNotFoundException{

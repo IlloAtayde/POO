@@ -41,12 +41,15 @@ public class Arquivos {
 		
 		ObjectInputStream stream_entrada = null;
 		
-		try {
+		//try {
 			stream_entrada = new ObjectInputStream(new BufferedInputStream(new FileInputStream(nomeArq)));
-			return stream_entrada.readObject();
-		}finally{
+			
+			Object o = stream_entrada.readObject();
+		//}finally{
 			stream_entrada.close();
-			}
+			
+			return o;
+			//}
 			
 	}
 		

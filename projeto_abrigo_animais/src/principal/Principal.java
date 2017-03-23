@@ -7,6 +7,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
+import cadastro.Registro;
 import colections.*;
 
 
@@ -30,7 +32,8 @@ public class Principal {
 		colColab.RecuperarColColaboradores("arqColColab");
 		colRegFin.RecuperarColRegFin("arqColRegFin");
 		}catch(Exception e){
-		}
+			System.err.println(e.getMessage());
+		}		
 		LocalDate hoje = LocalDate.now();
 		String data = hoje.format(DateTimeFormatter.ofPattern("EEEE',' dd 'de' MMMM 'de' uuuu"));
 		System.out.printf("%s\n\n",data);
@@ -49,12 +52,12 @@ public class Principal {
 		try{
 			colAnim.SalvarColAnimais("arqColAnimais");
 			colColab.SalvarColColaboradores("arqColColab");
-			colRegFin.SalvarColRegFin("arqRegFin");
+			colRegFin.SalvarColRegFin("arqColRegFin");
 			System.err.println("Arquivos de Backup salvos com sucesso!");
 		}catch (FileNotFoundException e) {
-			System.err.println("Arquivo não encontrado.");
+			System.err.println(e.getMessage());
 		}catch (IOException e){
-			System.err.println("Erro de leitura/escrita no arquivo.");
+			System.err.println(e.getMessage());
 		}
 
 	}

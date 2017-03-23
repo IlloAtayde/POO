@@ -12,7 +12,7 @@ import principal.Auxiliar;
 
 public class Cadastro {
 
-	public static Animal cadastrarAnimal(){
+	public static Animal cadastrarAnimal(int iDC, int iDG){
 		
 		String cad_animal_generico,cad_estado_saude,cad_gato,cad_cao,animal;
 		
@@ -51,7 +51,7 @@ public class Cadastro {
 		
 		switch (animal) {
 		case "c":
-			cad_animal_generico += Registro.GerarRegistroCachorro();
+			cad_animal_generico += Registro.GerarRegistroCachorro(iDC);
 			System.out.println("Porte do CÃO: ");
 			cad_cao = Auxiliar.lerString() + ";";
 			System.out.println("Habilidades: ");
@@ -60,7 +60,7 @@ public class Cadastro {
 			
 			return c;
 		case "g":
-			cad_animal_generico += Registro.GerarRegistroGato();
+			cad_animal_generico += Registro.GerarRegistroGato(iDG);
 			System.out.println("Informe se o GATO vomita bolas de pelos: ");
 			cad_gato = Auxiliar.lerS_N();
 			Gato g = new Gato(cad_animal_generico,cad_estado_saude,cad_gato);

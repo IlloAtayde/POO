@@ -81,15 +81,24 @@ public class Menu {
 	}
 
 	public static void trataMenuAnimais(int opMenu, ColecaoAnimais colAnim){
-		
+		try{
+		colAnim.PegarNumRegAni();
+		}catch(Exception e){
+			System.err.println(e.getMessage());
+		}
 		switch (opMenu) {
 		case 1://Insere animais
+			System.err.printf("%d cachorro e %d gato",colAnim.getIDC(), colAnim.getIDG());
 			System.out.println("ADICIONAR ANIMAL - Digite C para Cachorro, ou G para Gato: ");
-			colAnim.AdicionarAnimal(Cadastro.cadastrarAnimal());
+			colAnim.AdicionarAnimal(Cadastro.cadastrarAnimal(colAnim.getIDC(),colAnim.getIDG()));
 			break;
 		case 2://Exibe o quantitativo de animais cadastrados
 			System.out.println("Quantitativo de animais do abrigo: ");
-			colAnim.Quantitativo();
+			try{
+				colAnim.Quantitativo();
+				}catch(Exception e){
+					System.err.println(e.getMessage());
+				}
 			break;
 		case 3://Pesquisa animal pelo número do REGISTRO
 			System.out.println("BUSCA ANIMAL - Informe o número do registro: ");
@@ -101,20 +110,32 @@ public class Menu {
 			break;
 		case 4://Exibe os animais por sexo
 			System.out.println("Informe o sexo que deseja buscar: ");
+			try{
 			colAnim.QuantPorSexo(Auxiliar.lerChar("f,FÊMEA","m,MACHO"));
+			}catch(Exception e){
+				System.err.println(e.getMessage());
+			}
 			break;
 		case 5://Exibe os animais por categoria ou todos
 			System.out.println("LISTAR ANIMAL - Digite C para Cães, G para Gatos, ou T para Todos: ");
+			try{
 			colAnim.ExibirAnimais(Auxiliar.lerAnimal());
+			}catch(Exception e){
+				System.err.println(e.getMessage());
+			}
 			break;	
 		case 6://Exibe os animais Vacinado, Vermifugados e Castrados
 			System.out.println("Listagem dos animais prontos para adoção");
+			try{
 			colAnim.ListarVaci_Cast_Verm();
+			}catch(Exception e){
+				System.err.println(e.getMessage());
+			}
 			break;	
 		case 7://Remove animal pelo número de REGISTRO
 			System.out.println("REMOÇÃO ANIMAL - Informe o número do registro: ");
 			try{
-			colAnim.RemoverAnimal(colAnim.PesquisarAnimal(Auxiliar.lerInteiroToString()));
+			colAnim.RemoverAnimal(colAnim.PesquisarAnimal(Auxiliar.lerString()));
 			}catch (Exception e){
 				System.err.println(e.getMessage());
 			}
