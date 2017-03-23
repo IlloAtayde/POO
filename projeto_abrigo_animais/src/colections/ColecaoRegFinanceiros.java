@@ -1,10 +1,14 @@
 package colections;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import pojo.RegFinanceiro;
+import streams.Arquivos;
 
 public class ColecaoRegFinanceiros {
 	
@@ -32,7 +36,11 @@ public class ColecaoRegFinanceiros {
 		Iterator<RegFinanceiro> itRegFin = ColRegFinanceiro.iterator();
 		while(itRegFin.hasNext()){
 			RegFinanceiro regFinTemp = itRegFin.next();
-			System.out.println(regFinTemp.toString());
+			if(regFinTemp.getValor() < 0){
+				System.err.println(regFinTemp.toString());
+			}else{
+				System.out.println(regFinTemp.toString());
+			}
 		}
 		System.out.printf("Saldo Total: %.2f\n",RetornarSaldo());
 	}
@@ -58,10 +66,18 @@ public class ColecaoRegFinanceiros {
 			RegFinanceiro regFinTemp = itRegFin.next();
 			if(regFinTemp.getValor() < 0.00){
 				saldoTemp += regFinTemp.getValor();
-				System.out.println(regFinTemp.toString());
+				System.err.println(regFinTemp.toString());
 			}
 			
 		}
 		System.out.printf("Total de saídas: %.2f\n",saldoTemp);
+	}
+	
+	public void SalvarColRegFin(String nomeArq) throws IOException, FileNotFoundException{
+		Arquivos.SalvarObjArquivo(ColRegFinanceiro, nomeArq);
+	}
+	
+	public void RecuperarColRegFin(String nomeArq) throws IOException, FileNotFoundException, ClassNotFoundException{
+		ColRegFinanceiro = (List<RegFinanceiro>) Arquivos.RecuperarObjArquivo(nomeArq);
 	}
 }

@@ -3,13 +3,14 @@
  */
 package pojo;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
  * @author illoatayde
  *
  */
-public class Veterinario extends Colaborador {
+public class Veterinario extends Colaborador implements Serializable {
 
 	/**
 	 * @param documento
@@ -35,6 +36,13 @@ public class Veterinario extends Colaborador {
 		
 	}
 	
+	public Veterinario(String cad_colab_generico,String cad_end,String cad_vet) {
+		super(cad_colab_generico, cad_end);
+		String[] c_v_aux = cad_vet.split(";");
+		this.crmv = c_v_aux[0];
+		this.especialidade = c_v_aux[1];
+		//this.salario = super.getSalarioBase() * 5;
+	}
 	/* (non-Javadoc)
 	 * @see pojo.Colaborador#getDocumento()
 	 */

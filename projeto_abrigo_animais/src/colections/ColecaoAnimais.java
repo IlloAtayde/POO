@@ -1,5 +1,7 @@
 package colections;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -7,6 +9,7 @@ import java.util.List;
 import pojo.Animal;
 import pojo.Cachorro;
 import pojo.Gato;
+import streams.Arquivos;
 
 
 public class ColecaoAnimais {
@@ -24,7 +27,7 @@ public class ColecaoAnimais {
 		ColAnimal.remove(animal);
 	}	
 	
-	public Animal PesquisarAnimal(String reg){
+	public Animal PesquisarAnimal(String reg) throws Exception{
 		Iterator<Animal> itAnimal = ColAnimal.iterator();
 		while (itAnimal.hasNext()){
 			Animal aniTemp = itAnimal.next();
@@ -33,7 +36,7 @@ public class ColecaoAnimais {
 			}
 			return aniTemp;
 		}
-		return null;
+		throw new Exception("Registro NÃO encontrado!");
 	}
 
 	
@@ -107,5 +110,34 @@ public class ColecaoAnimais {
 			sexo = "macho(s)";
 		}
 		System.out.println("Total de " + total + " " + sexo);
+	}
+	
+	public void ListarVaci_Cast_Verm(){
+		Iterator<Animal> itAnimal = ColAnimal.iterator();
+		while (itAnimal.hasNext()) {
+			Animal aniTemp = itAnimal.next();
+			if(aniTemp.getCondicoesGerais().isVacinado() && aniTemp.getCondicoesGerais().isCastrado() && aniTemp.getCondicoesGerais().isVermifugado()){
+				System.out.println(aniTemp.toString());
+			}
+			
+		}
+	}
+	
+	public String GerarLogAnimais(){
+		Iterator<Animal> itAnimal = ColAnimal.iterator();
+		String logAnimais = "<p>";
+		while (itAnimal.hasNext()){
+			Animal aniTemp = itAnimal.next();
+			logAnimais += aniTemp.getRegistro() + " " + aniTemp.getSexo() + " " + aniTemp.getRaca() + "</p><p>";
+		}
+		return logAnimais;
+	}
+
+	public void SalvarColAnimais(String nomeArq) throws IOException, FileNotFoundException{
+		Arquivos.SalvarObjArquivo(ColAnimal, nomeArq);					
+	}
+	
+	public void RecuperarColAnimais(String nomeArq) throws IOException, FileNotFoundException, ClassNotFoundException{
+		ColAnimal = (List<Animal>) Arquivos.RecuperarObjArquivo(nomeArq);	
 	}
 }

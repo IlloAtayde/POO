@@ -3,6 +3,7 @@
  */
 package pojo;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -10,7 +11,7 @@ import java.time.format.DateTimeFormatter;
  * @author illoatayde
  *
  */
-public class Animal {
+public class Animal implements Serializable {
 	
 	private String registro;
 	private String nome;
@@ -29,11 +30,24 @@ public class Animal {
 		this.comportamento = comportamento;
 		DateTimeFormatter dataFormato = DateTimeFormatter.ofPattern("dd'/'MM'/'yyyy");
 		this.dataChegada = LocalDate.parse(dataChegStr, dataFormato);
-		//this.dataChegada = dataChegada;
 		this.dataNascimento = LocalDate.parse(dataNascStr, dataFormato);
-		this.condicoesGerais = new ProntuarioMedico();
+		this.condicoesGerais = condicoesGerais;
 	}
 	public Animal(){
+		
+	}
+	
+	public Animal(String str_atrib_gerais, String str_pront_med){
+		String[] s_a_g_aux = str_atrib_gerais.split(";");
+	
+		this.nome = s_a_g_aux[0];
+		this.sexo = s_a_g_aux[1];
+		this.raca = s_a_g_aux[2];
+		this.dataNascimento = LocalDate.parse(s_a_g_aux[3]);
+		this.dataChegada = LocalDate.parse(s_a_g_aux[4]);
+		this.comportamento = s_a_g_aux[5];
+		this.registro = s_a_g_aux[6];
+		this.condicoesGerais = new ProntuarioMedico(str_pront_med);
 		
 	}
 
@@ -151,13 +165,14 @@ public class Animal {
 	 */
 	@Override
 	public String toString() {
+		String sex;
 		if(sexo.equals("f")){
-			sexo = "fêmea";
+			sex = "fêmea";
 		}else{
-			sexo = "macho";
+			sex = "macho";
 		}
 		return "Registro: " + registro + "\tEntrada: " + dataChegada + "\nNome: " + nome + ", "
-				+ sexo + "\tRaça: " + raca + "\tComportamento: " + comportamento
+				+ sex + "\tRaça: " + raca + "\tComportamento: " + comportamento
 				+  "\nNascimento: "+ dataNascimento;
 	}
 	/* (non-Javadoc)

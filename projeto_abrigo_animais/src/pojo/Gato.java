@@ -3,13 +3,14 @@
  */
 package pojo;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
  * @author illoatayde
  *
  */
-public class Gato extends Animal {
+public class Gato extends Animal implements Serializable {
 
 	/**
 	 * @param registro
@@ -28,6 +29,11 @@ public class Gato extends Animal {
 	}
 	public Gato(){
 		
+	}
+	
+	public Gato(String str_atrib_gerais,String str_pront_medico, String str_atrib_espec) {
+		super(str_atrib_gerais,str_pront_medico);
+		this.vomitaBoladePelos = Boolean.valueOf(str_atrib_espec);		
 	}
 
 	/* (non-Javadoc)

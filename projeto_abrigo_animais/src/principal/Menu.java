@@ -3,6 +3,9 @@
  */
 package principal;
 
+import java.io.IOException;
+
+import sockets.Transmission;
 import cadastro.Cadastro;
 import colections.ColecaoAnimais;
 import colections.ColecaoColaboradores;
@@ -36,15 +39,15 @@ public class Menu {
 		return opMenu;	
 	}
 
-	public static void trataOpcaoMenu(int opcaoMenu, ColecaoAnimais colAnim, ColecaoColaboradores colColab, ColecaoRegFinanceiros colRegFin){
+	public static void trataOpcaoMenu(int opcaoMenu, ColecaoAnimais colAnim, ColecaoColaboradores colColab, ColecaoRegFinanceiros colRegFin) throws IOException{
 		int opSubMenu = 0;
 		switch (opcaoMenu) {
 		case 1:
 			do{
-				imprimirMenu("ANIMAIS", "ADICIONAR,QUANTITATIVO,BUSCA ANIMAL,QUANTIDADE P/SEXO,LISTAR ANIMAIS,REMOÇÃO ANIMAL,MENU PRINCIPAL");
-				opSubMenu = capturaMenu(7);
+				imprimirMenu("ANIMAIS", "ADICIONAR,QUANTITATIVO,BUSCA ANIMAL,QUANTIDADE P/SEXO,LISTAR ANIMAIS,LISTAR CAS_VERM_VAC,REMOÇÃO ANIMAL,MENU PRINCIPAL");
+				opSubMenu = capturaMenu(8);
 				trataMenuAnimais(opSubMenu,colAnim);
-			}while(opSubMenu < 7);
+			}while(opSubMenu < 8);
 			break;
 		case 2:
 			do{
@@ -61,6 +64,10 @@ public class Menu {
 			}while(opSubMenu < 7);
 			break;
 		case 4:
+			System.out.println("TRANSMITIR");
+			Transmission.transmitirLog(colAnim.GerarLogAnimais());
+			break;	
+		case 5:
 			System.out.println("SAINDO DO SISTEMA!");
 			break;
 		case 10:
@@ -78,7 +85,7 @@ public class Menu {
 		switch (opMenu) {
 		case 1://Insere animais
 			System.out.println("ADICIONAR ANIMAL - Digite C para Cachorro, ou G para Gato: ");
-			colAnim.AdicionarAnimal(Cadastro.cadastrarAnimal(Auxiliar.selecionarAnimal()));
+			colAnim.AdicionarAnimal(Cadastro.cadastrarAnimal());
 			break;
 		case 2://Exibe o quantitativo de animais cadastrados
 			System.out.println("Quantitativo de animais do abrigo: ");
@@ -86,21 +93,33 @@ public class Menu {
 			break;
 		case 3://Pesquisa animal pelo número do REGISTRO
 			System.out.println("BUSCA ANIMAL - Informe o número do registro: ");
+			try{
 			System.out.println(colAnim.PesquisarAnimal(Auxiliar.lerInteiroToString()).toString());
+			}catch (Exception e){
+				System.err.println(e.getMessage());
+			}
 			break;
 		case 4://Exibe os animais por sexo
 			System.out.println("Informe o sexo que deseja buscar: ");
-			colAnim.QuantPorSexo(Auxiliar.lerSexo());
+			colAnim.QuantPorSexo(Auxiliar.lerChar("f,FÊMEA","m,MACHO"));
 			break;
 		case 5://Exibe os animais por categoria ou todos
 			System.out.println("LISTAR ANIMAL - Digite C para Cães, G para Gatos, ou T para Todos: ");
 			colAnim.ExibirAnimais(Auxiliar.lerAnimal());
-			break;
-		case 6://Remove animal pelo número de REGISTRO
+			break;	
+		case 6://Exibe os animais Vacinado, Vermifugados e Castrados
+			System.out.println("Listagem dos animais prontos para adoção");
+			colAnim.ListarVaci_Cast_Verm();
+			break;	
+		case 7://Remove animal pelo número de REGISTRO
 			System.out.println("REMOÇÃO ANIMAL - Informe o número do registro: ");
+			try{
 			colAnim.RemoverAnimal(colAnim.PesquisarAnimal(Auxiliar.lerInteiroToString()));
+			}catch (Exception e){
+				System.err.println(e.getMessage());
+			}
 			break;
-		case 7:
+		case 8:
 			System.out.println("RETORNANDO AO MENU PRINCIPAL!");
 			break;
 			
@@ -114,27 +133,47 @@ public class Menu {
 		switch (opMenu) {
 		case 1://Adicionar colaborador
 			System.out.println("ADICIONAR COLABORADOR - Digite V para Veterinário, ou S para Serviços Gerais: ");
-			colColab.AdicionarColaborador(Cadastro.cadastrarColaborador(Auxiliar.selecionarColab()));
+			colColab.AdicionarColaborador(Cadastro.cadastrarColaborador());
 			break;
 		case 2:
 			System.out.println("BUSCAR COLABORADOR - Informe o número do Documento: ");
-			System.out.println(colColab.PesquisarColab(Auxiliar.lerInteiroToString().toString()));
+			try{
+				System.out.println(colColab.PesquisarColab(Auxiliar.lerInteiroToString().toString()));
+				}catch (Exception e){
+					System.err.println(e.getMessage());
+				}
 			break;
 		case 3:
 			System.out.println("PESQUISAR POR NOME - Informe o nome do colaborador: ");
-			colColab.PesquisarNome(Auxiliar.lerString());
+			try{
+				colColab.PesquisarNome(Auxiliar.lerString());
+				}catch (Exception e){
+					System.err.println(e.getMessage());
+				}
 			break;
 		case 4:
 			System.out.println("LISTAR VOLUNTÁRIOS: ");
-			colColab.ExibirColVoluntarios();
+			try{
+				colColab.ExibirColVoluntarios();
+				}catch (Exception e){
+					System.err.println(e.getMessage());
+				}
 			break;
 		case 5:
 			System.out.println("LISTAR TODOS - Digite V para Veterinário, S para Serviços Gerais, ou T para TODOS:");
-			colColab.ExibirColaboradores(Auxiliar.lerColab());
+			try{
+				colColab.ExibirColaboradores(Auxiliar.lerColab());
+				}catch (Exception e){
+					System.err.println(e.getMessage());
+				}
 			break;
 		case 6:
 			System.out.println("REMOÇÃO COLABORADOR - Informe o número do documento do colaborador: ");
-			colColab.RemoverColaborador(colColab.PesquisarColab(Auxiliar.lerInteiroToString()));
+			try{
+				colColab.RemoverColaborador(colColab.PesquisarColab(Auxiliar.lerInteiroToString()));
+				}catch (Exception e){
+					System.err.println(e.getMessage());
+				}
 			break;
 		case 7:
 			System.out.println("RETORNANDO AO MENU PRINCIPAL!");

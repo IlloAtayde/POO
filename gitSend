@@ -1,0 +1,10 @@
+ 2006  git fetch
+ 2007  git commit -m "Projeto POO - Abrigo de Animais"
+ 2008  git push origin master 
+ 2009  git status
+ 2010  git add projeto_abrigo_animais/*
+ 2011  git status
+ 2012  git fetch
+ 2013  git commit -m "Projeto POO - Abrigo de Animais"
+ 2014  git push origin master 
+ 2015  hy

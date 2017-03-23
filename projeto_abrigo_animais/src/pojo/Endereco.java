@@ -3,11 +3,13 @@
  */
 package pojo;
 
+import java.io.Serializable;
+
 /**
  * @author illoatayde
  *
  */
-public class Endereco {
+public class Endereco implements Serializable {
 	
 	private String CEP;
 	private String logradouro;
@@ -29,8 +31,17 @@ public class Endereco {
 		this.logradouro = textoPadrao;
 		this.numero = textoPadrao;
 		this.bairro = textoPadrao;
-		this.complemento = textoPadrao;
+		this.complemento = textoPadrao;	
+	}
+	
+	public Endereco(String cad_end){
+		String[] c_e_aux = cad_end.split(";");
 		
+		this.CEP = c_e_aux[0];
+		this.logradouro = c_e_aux[1];
+		this.numero = c_e_aux[2];
+		this.bairro = c_e_aux[3];
+		this.complemento = c_e_aux[4];	
 	}
 
 	/**

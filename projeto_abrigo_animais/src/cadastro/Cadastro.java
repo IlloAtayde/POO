@@ -12,79 +12,134 @@ import principal.Auxiliar;
 
 public class Cadastro {
 
-	public static Animal cadastrarAnimal(Animal a){
+	public static Animal cadastrarAnimal(){
 		
-		//System.out.println("ADICIONAR ANIMAL");
-		System.out.print("REGISTRO: ");
-		a.setRegistro(Auxiliar.lerInteiroToString());
-		System.out.print("Nome: ");
-		a.setNome(Auxiliar.lerString());
-		System.out.print("Sexo: ");
-		a.setSexo(Auxiliar.lerSexo());
-		System.out.println("Raça:");
-		a.setRaca(Auxiliar.lerString());
-		System.out.print("Data de nascimento: ");
-		a.setDataNascimento(Auxiliar.lerData());
-		System.out.print("Data de chegada no abrigo: ");
-		a.setDataChegada(Auxiliar.lerData());
-		System.out.println("Comportamento:");
-		a.setComportamento(Auxiliar.lerString());
-
-		if(a instanceof Cachorro){
-			Cachorro c = (Cachorro) a;
-			System.out.println("Porte: ");
-			c.setPorte(Auxiliar.lerString());
-			System.out.println("Habilidades:");
-			c.setHabilidades(Auxiliar.lerString());
-			return c;
+		String cad_animal_generico,cad_estado_saude,cad_gato,cad_cao,animal;
+		
+		System.out.println("Informe o animal a ser cadastrado: ");
+		
+		if(Auxiliar.lerChar("c;CÃO", "g;GATO").equals("c")){
+			animal = "c";
+			}else{
+				animal = "g";			
 		}
-		if(a instanceof Gato){
-			Gato g = (Gato) a;
-			System.out.println("Vomita bolas de pelo, S ou N?");
-			g.setVomitaBoladePelos(Auxiliar.lerS_N());
+		
+		System.out.println("Nome: ");
+		cad_animal_generico = Auxiliar.lerString() + ";";
+		System.out.println("Sexo: ");
+		cad_animal_generico += Auxiliar.lerChar("f;FÊMEA","m;MACHO") + ";";
+		System.out.println("Raça:");
+		cad_animal_generico += Auxiliar.lerString() + ";";
+		System.out.println("Data de nascimento: ");
+		cad_animal_generico += Auxiliar.lerData() + ";";
+		System.out.println("Data de chegada no abrigo: ");
+		cad_animal_generico += Auxiliar.lerData() + ";";
+		System.out.println("Comportamento:");
+		cad_animal_generico += Auxiliar.lerString() + ";";
+
+		System.out.println("Inserir abaixo dados relativos ao estado de saúde do animal");
+		System.out.println("Peso: ");
+		cad_estado_saude = String.valueOf(Auxiliar.lerDouble()) + ";";
+		System.out.println("Castrado(S/N)?");
+		cad_estado_saude += Auxiliar.lerS_N() + ";";
+		System.out.println("Vermifugado(S/N)?");
+		cad_estado_saude += Auxiliar.lerS_N() + ";";
+		System.out.println("Vacinado(S/N)?");
+		cad_estado_saude += Auxiliar.lerS_N() + ";";
+		System.out.println("Informe resumidamente o estado geral do animal:");
+		cad_estado_saude += Auxiliar.lerString();
+		
+		switch (animal) {
+		case "c":
+			cad_animal_generico += Registro.GerarRegistroCachorro();
+			System.out.println("Porte do CÃO: ");
+			cad_cao = Auxiliar.lerString() + ";";
+			System.out.println("Habilidades: ");
+			cad_cao += Auxiliar.lerString();
+			Cachorro c = new Cachorro(cad_animal_generico,cad_estado_saude,cad_cao);
+			
+			return c;
+		case "g":
+			cad_animal_generico += Registro.GerarRegistroGato();
+			System.out.println("Informe se o GATO vomita bolas de pelos: ");
+			cad_gato = Auxiliar.lerS_N();
+			Gato g = new Gato(cad_animal_generico,cad_estado_saude,cad_gato);
 			return g;
 		}
-		return a;
+		
+		return null;
 	}
-
-	public static Colaborador cadastrarColaborador(Colaborador col) {
-			
+	
+	public static Colaborador cadastrarColaborador() {
+		
+		String cad_colab_generico,cad_end,cad_vet,cad_ser_ger,colab;
+		
+		System.out.println("Informe o colaborador a ser cadastrado: ");
+		
+		if(Auxiliar.lerChar("v;VETERINÁRIO", "s;SERVIÇO GERAIS").equals("v")){
+			colab = "v";
+			}else{
+				colab = "s";			
+		}
+		
 		System.out.println("Documento: ");
-		col.setDocumento(Auxiliar.lerInteiroToString());
+		cad_colab_generico = Auxiliar.lerInteiroToString() + ";";
 		System.out.println("Nome: ");
-		col.setNome(Auxiliar.lerString());
+		cad_colab_generico += Auxiliar.lerString() + ";";
 		System.out.println("Data de nascimento: ");
-		col.setDataNascimento(Auxiliar.lerData());
+		cad_colab_generico += Auxiliar.lerData() + ";";
 		System.out.println("Voluntário, S ou N?");
-		col.setVoluntario(Auxiliar.lerS_N());
-		System.out.println("Endereço: ");
-		col.setEndereco(cadastrarEndereco());
+		cad_colab_generico += Auxiliar.lerS_N() + ";";
+		System.out.println("Data de chegada: ");
+		cad_colab_generico += Auxiliar.lerData() + ";";
+		
+		System.out.println("Inserir dados referente ao endereço.");
+		System.out.println("CEP: ");
+		cad_end = Auxiliar.lerInteiroToString() + ";";
+		System.out.println("Logradouro: ");
+		cad_end += Auxiliar.lerString() + ";";
+		System.out.println("Número: ");
+		cad_end += Auxiliar.lerInteiroToString() + ";";
+		System.out.println("Bairro: ");
+		cad_end += Auxiliar.lerString() + ";";
+		System.out.println("Complemento: ");
+		cad_end += Auxiliar.lerString();
 
-		if(col instanceof Veterinario){
-			Veterinario vet = (Veterinario) col;
-			System.out.println("CRMV: ");
-			vet.setCrmv(Auxiliar.lerInteiroToString());
-			System.out.println("Especialidade:");
-			vet.setEspecialidade(Auxiliar.lerString());
-			return vet;
+		switch (colab) {
+		case "v":
+			System.out.println("Número do CRMV: ");
+			cad_vet = Auxiliar.lerString() + ";";
+			System.out.println("Especialidade: ");
+			cad_vet += Auxiliar.lerString();
+			Veterinario v = new Veterinario(cad_colab_generico,cad_end,cad_vet);
+			return v;
+		case "s":
+			System.out.println("Informe a atividade a ser executada: ");
+			cad_ser_ger = Auxiliar.lerString();
+			ServicosGerais s = new ServicosGerais(cad_colab_generico,cad_end,cad_ser_ger);
+			return s;
 		}
-		if(col instanceof ServicosGerais){
-			ServicosGerais serGer = (ServicosGerais) col;
-			System.out.println("Atividade: ");
-			serGer.setAtividade(Auxiliar.lerString());
-			return serGer;
-		}
-		return col;
+		
+		return null;
 	}
 
 	public static RegFinanceiro cadastrarRegFinanceiro(){
-		RegFinanceiro regFin = new RegFinanceiro();
+		
+		String cad_reg_fin;
+		int fator = 1;
+		
+		System.out.println("Informe E se ENTRADA, ou S se SAÍDA: ");
+		if(Auxiliar.lerChar("E;ENTRADA","S;SAÍDA").equals("s")){
+			fator = -1;
+		}
+		
 		System.out.println("Insira a data:");
-		regFin.setData(Auxiliar.lerData());
+		cad_reg_fin = Auxiliar.lerData() + ";";
 		System.out.println("Insira o valor:");
-		regFin.setValor(Auxiliar.lerDouble());
+		cad_reg_fin += String.valueOf(Auxiliar.lerDouble()*fator) + ";";
 		System.out.println("Insira a descrição:");
-		regFin.setDescricao(Auxiliar.lerString());
+		cad_reg_fin += (Auxiliar.lerString());
+		RegFinanceiro regFin = new RegFinanceiro(cad_reg_fin);
 		return regFin;
 	}
 	

@@ -3,11 +3,13 @@
  */
 package pojo;
 
+import java.io.Serializable;
+
 /**
  * @author illoatayde
  *
  */
-public class ProntuarioMedico {
+public class ProntuarioMedico implements Serializable {
 	
 	private double peso;
 	private boolean vacinado;
@@ -22,7 +24,6 @@ public class ProntuarioMedico {
 		this.castrado = castrado;
 		this.avaliacaoClinica = avaliacaoClinica;
 	}
-	
 	public ProntuarioMedico(){
 		this.peso = 10.00;
 		this.castrado = false;
@@ -30,7 +31,14 @@ public class ProntuarioMedico {
 		this.vacinado = false;
 		this.avaliacaoClinica = "Não verificado";
 	}
-
+	public ProntuarioMedico(String cad_med){
+		String[] cad_medTemp = cad_med.split(";");
+		this.peso = Double.valueOf(cad_medTemp[0]);
+		this.castrado = Boolean.valueOf(cad_medTemp[1]);
+		this.vermifugado = Boolean.valueOf(cad_medTemp[2]);
+		this.vacinado = Boolean.valueOf(cad_medTemp[3]);
+		this.avaliacaoClinica = cad_medTemp[4];
+	}
 	/**
 	 * @return the peso
 	 */

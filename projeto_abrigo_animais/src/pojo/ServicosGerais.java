@@ -1,5 +1,6 @@
 package pojo;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
@@ -7,7 +8,7 @@ import java.time.LocalDate;
  *
  */
 
-public class ServicosGerais extends Colaborador {
+public class ServicosGerais extends Colaborador implements Serializable {
 	
 	/**
 	 * @param documento
@@ -29,7 +30,13 @@ public class ServicosGerais extends Colaborador {
 	public ServicosGerais(){
 		
 	}
-
+	
+	public ServicosGerais(String cad_colab_generico, String cad_end, String cad_ser_ger) {
+		super(cad_colab_generico, cad_end);
+		this.atividade = cad_ser_ger;
+		// TODO Auto-generated constructor stub
+	}
+	
 	/**
 	 * @return the atividade
 	 */

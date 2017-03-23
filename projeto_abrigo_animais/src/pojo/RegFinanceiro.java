@@ -1,9 +1,10 @@
 package pojo;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class RegFinanceiro {
+public class RegFinanceiro implements Serializable {
 
 	private LocalDate data;
 	private double valor;
@@ -20,6 +21,13 @@ public class RegFinanceiro {
 		this.data = LocalDate.now();
 		this.valor = 0.00;
 		this.descricao = "Nenhuma descrição";
+	}
+	
+	public RegFinanceiro(String cad_reg_fin){
+		String[] c_r_f_aux = cad_reg_fin.split(";");
+		this.data = LocalDate.parse(c_r_f_aux[0]);
+		this.valor = Double.valueOf(c_r_f_aux[1]);
+		this.descricao = c_r_f_aux[2];
 	}
 	/**
 	 * @return the data

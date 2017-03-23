@@ -3,6 +3,7 @@
  */
 package pojo;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -10,7 +11,7 @@ import java.time.format.DateTimeFormatter;
  * @author illoatayde
  *
  */
-public class Colaborador {
+public class Colaborador implements Serializable {
 	
 	private String documento;
 	private String nome;
@@ -43,6 +44,23 @@ public class Colaborador {
 		this.dataEntrada = LocalDate.now();
 		this.endereco = new Endereco();
 		this.salarioBase = 0.00;
+	}
+	
+	public Colaborador(String cad_colab_generico,String cad_end){
+		
+		String[] c_c_g_aux = cad_colab_generico.split(";");
+		
+		this.documento = c_c_g_aux[0];
+		this.nome = c_c_g_aux[1];
+		this.dataNascimento = LocalDate.parse(c_c_g_aux[2]);
+		this.voluntario = Boolean.valueOf(c_c_g_aux[3]);
+		this.dataEntrada = LocalDate.parse(c_c_g_aux[4]);
+		this.endereco = new Endereco(cad_end);
+		if(Boolean.valueOf(c_c_g_aux[3])){
+			this.salarioBase = 0.00;
+		}else{
+			this.salarioBase = 880.00;
+		}
 	}
 	
 	/**

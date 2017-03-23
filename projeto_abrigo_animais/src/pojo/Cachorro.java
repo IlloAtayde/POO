@@ -3,13 +3,14 @@
  */
 package pojo;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
  * @author illoatayde
  *
  */
-public class Cachorro extends Animal {
+public class Cachorro extends Animal implements Serializable {
 
 	/**
 	 * @param registro
@@ -30,6 +31,13 @@ public class Cachorro extends Animal {
 	}
 	public Cachorro() {
 		
+	}
+	
+	public Cachorro(String str_atrib_gerais,String str_pront_medico, String str_atrib_espec) {
+		super(str_atrib_gerais,str_pront_medico);
+		String[] s_a_e_aux = str_atrib_espec.split(";");
+		this.porte = s_a_e_aux[0];
+		this.habilidades = s_a_e_aux[1];		
 	}
 
 	/* (non-Javadoc)
