@@ -103,7 +103,7 @@ public class Menu {
 		case 3://Pesquisa animal pelo número do REGISTRO
 			System.out.println("BUSCA ANIMAL - Informe o número do registro: ");
 			try{
-			System.out.println(colAnim.PesquisarAnimal(Auxiliar.lerInteiroToString()).toString());
+			System.out.println(colAnim.PesquisarAnimal(Auxiliar.lerString()).toString());
 			}catch (Exception e){
 				System.err.println(e.getMessage());
 			}

@@ -143,12 +143,16 @@ public class ColecaoAnimais {
 			throw new Exception("Lista de animais está VAZIA!");
 		}
 		Iterator<Animal> itAnimal = ColAnimal.iterator();
+		int cont = 0;
 		while (itAnimal.hasNext()) {
 			Animal aniTemp = itAnimal.next();
 			if(aniTemp.getCondicoesGerais().isVacinado() && aniTemp.getCondicoesGerais().isCastrado() && aniTemp.getCondicoesGerais().isVermifugado()){
 				System.out.println(aniTemp.toString());
+				cont++;
 			}
-			
+		}
+		if(cont == 0){
+			throw new Exception("NÃO existe animais aptos para adoção!");
 		}
 	}
 	
@@ -186,7 +190,6 @@ public class ColecaoAnimais {
 		}
 		this.iDG = maiorDog;
 		this.iDC = maiorCat;
-		//Registro reg = new Registro(maiorDog, maiorCat);
 	}
 
 	public void SalvarColAnimais(String nomeArq) throws IOException, FileNotFoundException{
